@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Kayıt Ol | thetahmin.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animated-gradient {
+      background-size: 200% 200%;
+      animation: gradient 15s ease infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-[#0B0E1A] text-white min-h-screen flex items-center justify-center px-4 py-12">
+
+<!-- Animated Background -->
+<div class="fixed inset-0 opacity-20">
+  <div class="absolute top-20 left-10 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+  <div class="absolute top-40 right-10 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-700"></div>
+  <div class="absolute bottom-20 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
+</div>
+
+<!-- Register Container -->
+<div class="relative z-10 w-full max-w-md">
+  <!-- Logo -->
+  <div class="text-center mb-8">
+    <a href="index.html" class="inline-block">
+      <div class="float w-20 h-20 mx-auto bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-cyan-500/50 mb-4">
+        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+        </svg>
+      </div>
+      <h1 class="text-3xl font-bold">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+          thetahmin<span class="text-pink-400">.com</span>
+        </span>
+      </h1>
+    </a>
+  </div>
+
+  <!-- Register Card -->
+  <div class="bg-gradient-to-br from-cyan-500/5 via-purple-500/5 to-pink-500/5 border border-cyan-500/20 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
+    <h2 class="text-2xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+      Hesap Oluştur
+    </h2>
+    <p class="text-center text-gray-400 mb-8">AI destekli tahminlere hemen başlayın</p>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="space-y-5">
+      <!-- Full Name -->
+      <div>
+        <label for="fullname" class="block text-sm font-semibold text-cyan-400 mb-2">
+          Ad Soyad
+        </label>
+        <input 
+          type="text" 
+          id="fullname" 
+          required
+          placeholder="Ahmet Yılmaz"
+          class="w-full px-4 py-3 rounded-xl bg-[#0B0E1A] border-2 border-cyan-500/30 text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none transition-colors"
+        >
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-semibold text-purple-400 mb-2">
+          E-posta Adresi
+        </label>
+        <input 
+          type="email" 
+          id="email" 
+          required
+          placeholder="ornek@email.com"
+          class="w-full px-4 py-3 rounded-xl bg-[#0B0E1A] border-2 border-purple-500/30 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none transition-colors"
+        >
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label for="phone" class="block text-sm font-semibold text-pink-400 mb-2">
+          Telefon Numarası
+        </label>
+        <input 
+          type="tel" 
+          id="phone" 
+          required
+          placeholder="+90 5XX XXX XX XX"
+          class="w-full px-4 py-3 rounded-xl bg-[#0B0E1A] border-2 border-pink-500/30 text-white placeholder-gray-500 focus:border-pink-400 focus:outline-none transition-colors"
+        >
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-semibold text-cyan-400 mb-2">
+          Şifre
+        </label>
+        <div class="relative">
+          <input 
+            type="password" 
+            id="password" 
+            required
+            minlength="6"
+            placeholder="En az 6 karakter"
+            class="w-full px-4 py-3 rounded-xl bg-[#0B0E1A] border-2 border-cyan-500/30 text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none transition-colors"
+          >
+          <button 
+            type="button" 
+            id="togglePassword"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+          >
+            <svg id="eyeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </button>
+        </div>
+        <!-- Password Strength Indicator -->
+        <div class="mt-2 flex gap-1">
+          <div id="strength1" class="h-1 flex-1 bg-gray-700 rounded transition-all"></div>
+          <div id="strength2" class="h-1 flex-1 bg-gray-700 rounded transition-all"></div>
+          <div id="strength3" class="h-1 flex-1 bg-gray-700 rounded transition-all"></div>
+          <div id="strength4" class="h-1 flex-1 bg-gray-700 rounded transition-all"></div>
+        </div>
+        <p id="strengthText" class="text-xs text-gray-400 mt-1"></p>
+      </div>
+
+      <!-- Confirm Password -->
+      <div>
+        <label for="confirmPassword" class="block text-sm font-semibold text-purple-400 mb-2">
+          Şifre Tekrar
+        </label>
+        <div class="relative">
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            required
+            placeholder="Şifrenizi tekrar girin"
+            class="w-full px-4 py-3 rounded-xl bg-[#0B0E1A] border-2 border-purple-500/30 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none transition-colors"
+          >
+          <button 
+            type="button" 
+            id="toggleConfirmPassword"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+          >
+            <svg id="eyeIcon2" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </button>
+        </div>
+        <p id="matchText" class="text-xs mt-1 hidden"></p>
+      </div>
+
+      <!-- Register Button -->
+      <button 
+        type="submit"
+        class="w-full py-4 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-xl shadow-purple-500/30 animated-gradient"
+      >
+        Hesap Oluştur
+      </button>
+    </form>
+
+    <!-- Divider -->
+    <div class="relative my-8">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-700"></div>
+      </div>
+      <div class="relative flex justify-center text-sm">
+        <span class="px-4 bg-[#0B0E1A] text-gray-400">veya</span>
+      </div>
+    </div>
+
+    <!-- Login Link -->
+    <p class="text-center text-gray-400 mt-8">
+      Zaten hesabınız var mı? 
+      <a href="login.html" class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 font-semibold hover:from-cyan-300 hover:to-purple-400 transition-all">
+        Giriş Yap
+      </a>
+    </p>
+  </div>
+
+  <!-- Back to Home -->
+  <div class="text-center mt-6">
+    <a href="/" class="text-gray-400 hover:text-cyan-400 transition-colors inline-flex items-center gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Ana Sayfaya Dön
+    </a>
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+// Toggle Password Visibility
+function setupPasswordToggle(toggleBtnId, inputId, iconId) {
+  const toggleBtn = document.getElementById(toggleBtnId);
+  const input = document.getElementById(inputId);
+  const icon = document.getElementById(iconId);
+
+  toggleBtn.addEventListener('click', function() {
+    const type = input.type === 'password' ? 'text' : 'password';
+    input.type = type;
+    
+    if (type === 'password') {
+      icon.innerHTML = `
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+      `;
+    } else {
+      icon.innerHTML = `
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>
+      `;
+    }
+  });
+}
+
+setupPasswordToggle('togglePassword', 'password', 'eyeIcon');
+setupPasswordToggle('toggleConfirmPassword', 'confirmPassword', 'eyeIcon2');
+
+// Password Strength Checker
+const passwordInput = document.getElementById('password');
+const strengthBars = [
+  document.getElementById('strength1'),
+  document.getElementById('strength2'),
+  document.getElementById('strength3'),
+  document.getElementById('strength4')
+];
+const strengthText = document.getElementById('strengthText');
+
+passwordInput.addEventListener('input', function() {
+  const password = this.value;
+  let strength = 0;
+  
+  // Reset bars
+  strengthBars.forEach(bar => {
+    bar.className = 'h-1 flex-1 bg-gray-700 rounded transition-all';
+  });
+  
+  if (password.length === 0) {
+    strengthText.textContent = '';
+    return;
+  }
+  
+  // Check criteria
+  if (password.length >= 6) strength++;
+  if (password.length >= 8) strength++;
+  if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+  if (/\d/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+  
+  // Update bars
+  const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500'];
+  const texts = ['Çok Zayıf', 'Zayıf', 'Orta', 'Güçlü'];
+  
+  for (let i = 0; i < strength; i++) {
+    strengthBars[i].className = `h-1 flex-1 ${colors[strength - 1]} rounded transition-all`;
+  }
+  
+  strengthText.textContent = texts[strength - 1] || '';
+  strengthText.className = `text-xs mt-1 ${colors[strength - 1].replace('bg-', 'text-')}`;
+});
+
+// Password Match Checker
+const confirmPasswordInput = document.getElementById('confirmPassword');
+const matchText = document.getElementById('matchText');
+
+confirmPasswordInput.addEventListener('input', function() {
+  const password = passwordInput.value;
+  const confirmPassword = this.value;
+  
+  if (confirmPassword.length === 0) {
+    matchText.classList.add('hidden');
+    return;
+  }
+  
+  matchText.classList.remove('hidden');
+  
+  if (password === confirmPassword) {
+    matchText.textContent = '✓ Şifreler eşleşiyor';
+    matchText.className = 'text-xs mt-1 text-green-400';
+  } else {
+    matchText.textContent = '✗ Şifreler eşleşmiyor';
+    matchText.className = 'text-xs mt-1 text-red-400';
+  }
+});
+
+// Form Submission
+const registerForm = document.getElementById('registerForm');
+registerForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const fullname = document.getElementById('fullname').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const password = passwordInput.value;
+  const confirmPassword = confirmPasswordInput.value;
+  const terms = document.getElementById('terms').checked;
+  
+  // Validate passwords match
+  if (password !== confirmPassword) {
+    alert('Şifreler eşleşmiyor!');
+    return;
+  }
+  
+  // Validate password strength
+  if (password.length < 6) {
+    alert('Şifre en az 6 karakter olmalıdır!');
+    return;
+  }
+  
+  // Validate terms
+  if (!terms) {
+    alert('Kullanım şartlarını kabul etmelisiniz!');
+    return;
+  }
+  
+  console.log('Register attempt:', { fullname, email, phone, password, terms });
+  
+  // Show loading state
+  const submitBtn = registerForm.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Hesap Oluşturuluyor...';
+  submitBtn.disabled = true;
+  
+  // Simulate API call
+  setTimeout(() => {
+    alert('Kayıt başarılı! (Demo Mode)\n\nAPI entegrasyonu sonrası gerçek kayıt yapılacak.');
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+    window.location.href = 'login.html'; // Redirect to login
+  }, 1500);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>thetahmin.com | Yapay Zeka Futbol Tahmin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animated-gradient {
+      background-size: 200% 200%;
+      animation: gradient 15s ease infinite;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body class="bg-[#0B0E1A] text-white overflow-x-hidden">
+
+<!-- ================= NAVBAR ================= -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[#0B0E1A]/90 backdrop-blur-lg border-b border-cyan-500/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    
+    <!-- Logo -->
+    <a href="#home" class="text-xl sm:text-2xl font-bold">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+        thetahmin<span class="text-pink-400">.com</span>
+      </span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:flex gap-6 xl:gap-8 items-center text-sm xl:text-base">
+      <a href="#how" class="hover:text-cyan-400 transition-colors duration-300">Nasıl Çalışır</a>
+      <a href="#stats" class="hover:text-cyan-400 transition-colors duration-300">İstatistik</a>
+      <a href="#predict" class="hover:text-cyan-400 transition-colors duration-300">Tahmin Al</a>
+      <a href="#pricing" class="hover:text-cyan-400 transition-colors duration-300">Fiyatlar</a>
+      <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">Hakkımızda</a>
+      
+      <a href="/login.html" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 font-semibold hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/50">
+        Giriş Yap
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button id="menuBtn" class="lg:hidden text-3xl hover:text-cyan-400 transition-colors">
+      <span id="menuIcon">☰</span>
+    </button>
+  </div>
+</header>
+
+<div id="mobileMenu" class="fixed inset-0 z-40 bg-[#0B0E1A]/98 backdrop-blur-xl hidden lg:hidden">
+  <div class="flex flex-col justify-center items-center h-full gap-8 text-2xl w-full px-6">
+    
+    <a href="#how" class="menuItem w-full text-center hover:text-cyan-400 transition-colors">
+      Nasıl Çalışır
+    </a>
+
+    <a href="#stats" class="menuItem w-full text-center hover:text-cyan-400 transition-colors">
+      İstatistik
+    </a>
+
+    <a href="#predict" class="menuItem w-full text-center hover:text-cyan-400 transition-colors">
+      Tahmin Al
+    </a>
+
+    <a href="#pricing" class="menuItem w-full text-center hover:text-cyan-400 transition-colors">
+      Fiyatlar
+    </a>
+
+    <a href="#about" class="menuItem w-full text-center hover:text-cyan-400 transition-colors">
+      Hakkımızda
+    </a>
+
+    <a href="/login.html"
+       class="menuItem w-full text-center px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 font-semibold">
+      Giriş Yap
+    </a>
+
+  </div>
+</div>
+
+
+<!-- ================= HERO SECTION ================= -->
+<section id="home" class="relative min-h-screen flex items-center justify-center text-center px-4 sm:px-6 overflow-hidden">
+  <!-- Animated Background -->
+  <div class="absolute inset-0 opacity-30">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+    <div class="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-700"></div>
+    <div class="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
+  </div>
+
+  <div class="relative max-w-5xl mx-auto z-10">
+    <!-- AI Brain Icon -->
+    <div class="mb-8 flex justify-center float-animation">
+      <div class="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-cyan-500/50">
+        <svg class="w-12 h-12 sm:w-16 sm:h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 animated-gradient">
+        VERİ BİLİMİ FUTBOL TAHMİNİYLE BULUŞUYOR
+      </span>
+    </h1>
+    
+    <p class="mt-6 text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+      Yapay zeka, verileri analiz ederek maçlar için en isabetli tahminleri tek ekranda sunar.
+    </p>
+    
+    <a href="#predict" class="inline-block mt-10 px-8 sm:px-12 py-4 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 text-base sm:text-lg font-bold hover:scale-105 transition-transform duration-300 shadow-2xl shadow-pink-500/50 animated-gradient">
+      TAHMİNLERİ GÖR
+    </a>
+  </div>
+</section>
+
+<!-- ================= NASIL ÇALIŞIR ================= -->
+<section id="how" class="relative py-20 sm:py-32 bg-gradient-to-b from-[#0B0E1A] to-[#0E1225] px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+      Nasıl Çalışır?
+    </h2>
+    <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+      Gelişmiş algoritmalar ve büyük veri analiziyle futbol tahmininde yeni bir dönem
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <!-- Card 1 -->
+      <div class="group p-8 bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/30 rounded-3xl hover:border-cyan-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
+        <div class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+          </svg>
+        </div>
+        <h3 class="text-cyan-400 text-xl sm:text-2xl font-bold mb-4">Veri Toplama</h3>
+        <p class="text-gray-300 leading-relaxed">50.000+ maç, takım, oyuncu ve lig verisi. Gerçek zamanlı performans takibi ve detaylı istatistik analizi.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="group p-8 bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/30 rounded-3xl hover:border-purple-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2">
+        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+          </svg>
+        </div>
+        <h3 class="text-purple-400 text-xl sm:text-2xl font-bold mb-4">AI Analizi</h3>
+        <p class="text-gray-300 leading-relaxed">Makine öğrenmesi ve olasılık modellemesi. Derin sinir ağları ile pattern tanıma ve tahmin optimizasyonu.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group p-8 bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/30 rounded-3xl hover:border-pink-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-500/20 hover:-translate-y-2 sm:col-span-2 lg:col-span-1">
+        <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-pink-400 text-xl sm:text-2xl font-bold mb-4">Tahmin Üretimi</h3>
+        <p class="text-gray-300 leading-relaxed">Sonuç, gol, KG ve skor tahminleri. Güvenilirlik skorları ile risk analizi ve bahis stratejisi önerileri.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= İSTATİSTİK ================= -->
+<section id="stats" class="relative py-20 sm:py-32 px-4 sm:px-6 bg-[#0B0E1A]">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+      Rakamlarla Platform
+    </h2>
+    <p class="text-gray-400 mb-16 max-w-2xl mx-auto">
+      Binlerce kullanıcının güvendiği platform
+    </p>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+      <div class="p-8 bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/30 rounded-3xl hover:scale-105 transition-transform">
+        <p class="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600 mb-3">%78</p>
+        <p class="text-gray-300 text-sm sm:text-base font-semibold">Tahmin Doğruluğu</p>
+      </div>
+      
+      <div class="p-8 bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/30 rounded-3xl hover:scale-105 transition-transform">
+        <p class="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600 mb-3">50K+</p>
+        <p class="text-gray-300 text-sm sm:text-base font-semibold">Analiz Edilen Maç</p>
+      </div>
+      
+      <div class="p-8 bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/30 rounded-3xl hover:scale-105 transition-transform">
+        <p class="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-3">20+</p>
+        <p class="text-gray-300 text-sm sm:text-base font-semibold">Farklı Lig</p>
+      </div>
+      
+      <div class="p-8 bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/30 rounded-3xl hover:scale-105 transition-transform col-span-2 lg:col-span-1">
+        <p class="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600 mb-3">7/24</p>
+        <p class="text-gray-300 text-sm sm:text-base font-semibold">Canlı Destek</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAHMİN AL ================= -->
+<section id="predict" class="relative py-20 sm:py-32 bg-gradient-to-b from-[#0B0E1A] to-[#0E1225] px-4 sm:px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="bg-gradient-to-br from-cyan-500/5 via-purple-500/5 to-pink-500/5 border border-cyan-500/20 rounded-3xl p-6 sm:p-10 md:p-12 backdrop-blur-xl shadow-2xl">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-3 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+        Tahmin Almak İçin Seçim Yapın
+      </h2>
+      <p class="text-center text-gray-400 mb-10">
+        Lig ve maç seçerek AI destekli tahminlere ulaşın
+      </p>
+
+      <!-- League Selection -->
+      <div class="mb-6">
+        <label class="block text-cyan-400 mb-3 text-sm sm:text-base font-semibold">1. Lig Seçimi</label>
+        <select id="leagueSelect" class="w-full p-4 rounded-2xl bg-[#0B0E1A] border-2 border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none transition-colors text-sm sm:text-base">
+          <option value="">-- Ligi Seçiniz --</option>
+        </select>
+      </div>
+
+      <!-- Match Selection -->
+      <div class="mb-8">
+        <label class="block text-purple-400 mb-3 text-sm sm:text-base font-semibold">2. Maç Seçimi</label>
+        <select id="matchSelect" disabled class="w-full p-4 rounded-2xl bg-[#0B0E1A] border-2 border-purple-500/30 text-white focus:border-purple-400 focus:outline-none transition-colors disabled:opacity-50 text-sm sm:text-base">
+          <option>Önce ligi seçiniz</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <button id="showPrediction" disabled
+        class="w-full py-4 sm:py-5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 font-bold text-base sm:text-lg disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all duration-300 shadow-xl shadow-pink-500/30 animated-gradient">
+        TAHMİNİ GÖSTER
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ÖRNEK TAHMİN ================= -->
+<section class="py-20 sm:py-32 px-4 sm:px-6 bg-[#0B0E1A]">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+      Tottenham vs Brentford
+    </h2>
+    <p class="text-center text-gray-400 mb-4">Premier League | 2025-12-06 18:00:00</p>
+    <p class="text-center text-sm text-gray-500 mb-12">Örnek Tahmin Görünümü</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Prediction Card 1 -->
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/30 rounded-3xl text-center hover:scale-105 transition-all">
+        <p class="text-xs sm:text-sm text-gray-400 mb-3 uppercase tracking-wider">Maç Sonucu (1X2)</p>
+        <p class="text-cyan-400 text-2xl sm:text-3xl font-bold mb-3">Ev Sahibi (1)</p>
+        <div class="flex items-center justify-center gap-2">
+          <div class="w-full bg-gray-800 rounded-full h-2">
+            <div class="bg-gradient-to-r from-cyan-400 to-cyan-600 h-2 rounded-full" style="width: 95%"></div>
+          </div>
+        </div>
+        <p class="text-cyan-300 font-semibold mt-2 text-sm sm:text-base">Güvenilirlik: %95</p>
+      </div>
+
+      <!-- Prediction Card 2 -->
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/30 rounded-3xl text-center hover:scale-105 transition-all">
+        <p class="text-xs sm:text-sm text-gray-400 mb-3 uppercase tracking-wider">Toplam Gol (2.5)</p>
+        <p class="text-purple-400 text-2xl sm:text-3xl font-bold mb-3">2.5 Gol Altı</p>
+        <div class="flex items-center justify-center gap-2">
+          <div class="w-full bg-gray-800 rounded-full h-2">
+            <div class="bg-gradient-to-r from-purple-400 to-purple-600 h-2 rounded-full" style="width: 72%"></div>
+          </div>
+        </div>
+        <p class="text-purple-300 font-semibold mt-2 text-sm sm:text-base">Güvenilirlik: %72</p>
+      </div>
+
+      <!-- Prediction Card 3 -->
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/30 rounded-3xl text-center hover:scale-105 transition-all">
+        <p class="text-xs sm:text-sm text-gray-400 mb-3 uppercase tracking-wider">Karşılıklı Gol (KG)</p>
+        <p class="text-pink-400 text-2xl sm:text-3xl font-bold mb-3">Yok (KG)</p>
+        <div class="flex items-center justify-center gap-2">
+          <div class="w-full bg-gray-800 rounded-full h-2">
+            <div class="bg-gradient-to-r from-pink-400 to-pink-600 h-2 rounded-full" style="width: 68%"></div>
+          </div>
+        </div>
+        <p class="text-pink-300 font-semibold mt-2 text-sm sm:text-base">Güvenilirlik: %68</p>
+      </div>
+
+      <!-- Prediction Card 4 -->
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/30 rounded-3xl text-center hover:scale-105 transition-all">
+        <p class="text-xs sm:text-sm text-gray-400 mb-3 uppercase tracking-wider">Skor Tahmini</p>
+        <p class="text-green-400 text-2xl sm:text-3xl font-bold mb-3">1 - 0</p>
+        <div class="px-3 py-1 bg-green-500/20 rounded-full inline-block">
+          <p class="text-green-300 font-semibold text-xs sm:text-sm">Risk Seviyesi</p>
+        </div>
+        <p class="text-green-300 font-semibold mt-2 text-sm sm:text-base">Düşük</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FİYATLAR ================= -->
+<section id="pricing" class="relative py-20 sm:py-32 bg-gradient-to-b from-[#0E1225] to-[#0B0E1A] px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+      Fiyatlandırma Paketleri
+    </h2>
+    <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+      İhtiyacınıza uygun paketi seçin ve tahmin almaya başlayın
+    </p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <!-- Free Package -->
+      <div class="p-8 bg-gradient-to-br from-gray-500/10 to-transparent border border-gray-500/30 rounded-3xl hover:scale-105 transition-all">
+        <h3 class="text-2xl font-bold mb-2">Demo Paketi</h3>
+        <p class="text-gray-400 mb-6 text-sm">Platforma giriş için ideal</p>
+        <div class="mb-6">
+          <span class="text-5xl font-bold text-cyan-400">5</span>
+          <span class="text-gray-400 ml-2">KREDİ</span>
+        </div>
+        <div class="text-4xl font-bold mb-8 text-white">100 TL</div>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>5 adet tahmin hakkı</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Temel istatistikler</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Email destek</span>
+          </li>
+        </ul>
+        <button class="w-full py-3 rounded-full border-2 border-cyan-400 text-cyan-400 font-semibold hover:bg-cyan-400 hover:text-white transition-all">
+          Satın Al
+        </button>
+      </div>
+
+      <!-- Pro Package -->
+      <div class="p-8 bg-gradient-to-br from-purple-500/20 to-transparent border-2 border-purple-500 rounded-3xl lg:scale-105 hover:scale-110 transition-all shadow-2xl shadow-purple-500/20">
+        <div class="inline-block px-4 py-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full text-xs font-bold mb-4">
+          ÖNERİLEN
+        </div>
+        <h3 class="text-2xl font-bold mb-2">Temel Paket</h3>
+        <p class="text-gray-400 mb-6 text-sm">En popüler seçim</p>
+        <div class="mb-6">
+          <span class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">10</span>
+          <span class="text-gray-400 ml-2">KREDİ</span>
+        </div>
+        <div class="text-4xl font-bold mb-8 text-white">175 TL</div>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>10 adet tahmin hakkı</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Detaylı istatistikler</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Tüm liglere erişim</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>7/24 canlı destek</span>
+          </li>
+        </ul>
+        <button class="w-full py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:scale-105 transition-all shadow-lg">
+          Satın Al
+        </button>
+      </div>
+
+      <!-- Elite Package -->
+      <div class="p-8 bg-gradient-to-br from-amber-500/10 to-transparent border border-amber-500/30 rounded-3xl hover:scale-105 transition-all md:col-span-2 lg:col-span-1">
+        <h3 class="text-2xl font-bold mb-2">Elite Paket</h3>
+        <p class="text-gray-400 mb-6 text-sm">Profesyonel kullanıcılar için</p>
+        <div class="mb-6">
+          <span class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">∞</span>
+          <span class="text-gray-400 ml-2">SINIRSIZ</span>
+        </div>
+        <div class="text-4xl font-bold mb-8 text-white">499 TL<span class="text-base text-gray-400">/ay</span></div>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Sınırsız tahmin</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Gelişmiş AI analizi</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Özel raporlar</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Öncelikli destek</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300">
+            <svg class="w-5 h-5 text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>API erişimi</span>
+          </li>
+        </ul>
+        <button class="w-full py-3 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:scale-105 transition-all shadow-lg">
+          Satın Al
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HAKKIMIZDA ================= -->
+<section id="about" class="relative py-20 sm:py-32 px-4 sm:px-6 bg-[#0B0E1A]">
+  <div class="max-w-5xl mx-auto text-center">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+      Hakkımızda
+    </h2>
+    <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
+      <strong class="text-cyan-400">thetahmin.com</strong>, futbolu sezgiyle değil veriyle yorumlayan yapay zeka tabanlı bir analiz platformudur. 
+      Milyonlarca maç verisini işleyen algoritmalarımız, takım performansları, oyuncu istatistikleri, 
+      form durumları ve daha birçok parametreyi analiz ederek en yüksek doğruluk oranına sahip tahminleri sunar.
+    </p>
+    <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+      Amacımız, futbol severlere ve bahis tutkunlarına bilime dayalı, güvenilir tahminler sunarak 
+      onların kazanma şansını artırmaktır. Veriyle Gelecek Tahmin Et sloganımızla, 
+      futbol analizinde yeni bir dönem başlatıyoruz.
+    </p>
+
+    <div class="mt-16 grid sm:grid-cols-3 gap-8">
+      <div class="p-6 bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/30 rounded-2xl">
+        <div class="text-4xl mb-4">🎯</div>
+        <h3 class="text-xl font-bold text-cyan-400 mb-2">Doğruluk</h3>
+        <p class="text-gray-400 text-sm">Yüksek doğruluk oranıyla güvenilir tahminler</p>
+      </div>
+      <div class="p-6 bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/30 rounded-2xl">
+        <div class="text-4xl mb-4">🤖</div>
+        <h3 class="text-xl font-bold text-purple-400 mb-2">Teknoloji</h3>
+        <p class="text-gray-400 text-sm">En gelişmiş AI ve makine öğrenmesi</p>
+      </div>
+      <div class="p-6 bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/30 rounded-2xl sm:col-span-3 lg:col-span-1">
+        <div class="text-4xl mb-4">📊</div>
+        <h3 class="text-xl font-bold text-pink-400 mb-2">Analiz</h3>
+        <p class="text-gray-400 text-sm">Kapsamlı veri analizi ve raporlama</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-[#0E1225] border-t border-cyan-500/20 py-12 px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto text-center">
+    <div class="text-2xl font-bold mb-4">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+        thetahmin<span class="text-pink-400">.com</span>
+      </span>
+    </div>
+    <p class="text-gray-400 mb-6">Veriyle Gelecek Tahmin Et.</p>
+    <div class="flex justify-center gap-6 mb-6">
+      <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">Instagram</a>
+      <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">Twitter</a>
+      <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">Facebook</a>
+    </div>
+    <p class="text-gray-500 text-sm">&copy; 2025 thetahmin.com | Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+// Mobile Menu Toggle
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+const menuIcon = document.getElementById("menuIcon");
+const menuItems = document.querySelectorAll(".menuItem");
+
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+  mobileMenu.classList.toggle("flex");
+  menuIcon.textContent = mobileMenu.classList.contains("hidden") ? "☰" : "✕";
+});
+
+// Close mobile menu when clicking on a menu item
+menuItems.forEach(item => {
+  item.addEventListener("click", () => {
+    mobileMenu.classList.add("hidden");
+    mobileMenu.classList.remove("flex");
+    menuIcon.textContent = "☰";
+  });
+});
+
+// Static League and Match Data
+const DATA = {
+  "Premier League": [
+    "Tottenham vs Brentford",
+    "Arsenal vs Chelsea",
+    "Manchester United vs Liverpool",
+    "Manchester City vs Everton"
+  ],
+  "La Liga": [
+    "Barcelona vs Sevilla",
+    "Real Madrid vs Villarreal",
+    "Atletico Madrid vs Valencia",
+    "Real Sociedad vs Athletic Bilbao"
+  ],
+  "Serie A": [
+    "Inter vs Milan",
+    "Juventus vs Roma",
+    "Napoli vs Lazio",
+    "Atalanta vs Fiorentina"
+  ],
+  "Bundesliga": [
+    "Bayern Munich vs Borussia Dortmund",
+    "RB Leipzig vs Bayer Leverkusen",
+    "Wolfsburg vs Eintracht Frankfurt"
+  ],
+  "Ligue 1": [
+    "PSG vs Marseille",
+    "Lyon vs Monaco",
+    "Lille vs Nice"
+  ],
+  "Süper Lig": [
+    "Galatasaray vs Fenerbahçe",
+    "Beşiktaş vs Trabzonspor",
+    "Başakşehir vs Kasımpaşa"
+  ]
+};
+
+const leagueSelect = document.getElementById("leagueSelect");
+const matchSelect = document.getElementById("matchSelect");
+const showPredictionBtn = document.getElementById("showPrediction");
+
+// Populate league options
+Object.keys(DATA).forEach(league => {
+  const option = document.createElement("option");
+  option.value = league;
+  option.textContent = league;
+  leagueSelect.appendChild(option);
+});
+
+// Handle league selection
+leagueSelect.addEventListener("change", function() {
+  matchSelect.innerHTML = "";
+  showPredictionBtn.disabled = true;
+
+  if (!this.value) {
+    matchSelect.disabled = true;
+    const defaultOption = document.createElement("option");
+    defaultOption.textContent = "Önce ligi seçiniz";
+    matchSelect.appendChild(defaultOption);
+    return;
+  }
+
+  matchSelect.disabled = false;
+  
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "-- Maç Seçiniz --";
+  matchSelect.appendChild(defaultOption);
+
+  DATA[this.value].forEach(match => {
+    const option = document.createElement("option");
+    option.value = match;
+    option.textContent = match;
+    matchSelect.appendChild(option);
+  });
+});
+
+// Handle match selection
+matchSelect.addEventListener("change", function() {
+  showPredictionBtn.disabled = !this.value;
+});
+
+// Handle show prediction button
+showPredictionBtn.addEventListener("click", function() {
+  const selectedLeague = leagueSelect.value;
+  const selectedMatch = matchSelect.value;
+  
+  if (selectedLeague && selectedMatch) {
+    // Scroll to prediction example section
+    document.querySelector('#predict').nextElementSibling.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'center'
+    });
+    
+    // You can add animation or highlight effect here
+    setTimeout(() => {
+      alert(`${selectedLeague}\n${selectedMatch}\n\nTahmin hazırlanıyor... (Bu özellik yakında aktif olacak)`);
+    }, 500);
+  }
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
