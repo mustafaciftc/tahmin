@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tahmin Al | thetahmin.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/custom.css">
+ 
+</head>
+
+<body class="bg-[#0B0E1A] text-white overflow-x-hidden">
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Hero -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 bg-gradient-to-b from-[#0B0E1A] to-[#0E1225]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+        AI Destekli Tahmin Al
+      </h1>
+      <p class="text-gray-300 text-lg sm:text-xl mb-8 leading-relaxed">
+        Lig ve maç seçerek AI destekli tahminlere ulaşın
+      </p>
+    </div>
+  </section>
+
+  <!-- Prediction Form -->
+  <section class="py-20 px-4 sm:px-6 bg-[#0B0E1A]">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-gradient-to-br from-cyan-500/5 via-purple-500/5 to-pink-500/5 border border-cyan-500/20 rounded-3xl p-6 sm:p-10 md:p-12 backdrop-blur-xl shadow-2xl">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-3 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+          Tahmin Almak İçin Seçim Yapın
+        </h2>
+        <p class="text-center text-gray-400 mb-10">
+          Lig ve maç seçerek AI destekli tahminlere ulaşın
+        </p>
+
+        <!-- League Selection (Custom Dropdown) -->
+        <div class="mb-6">
+          <label class="block text-cyan-400 mb-3 text-sm sm:text-base font-semibold">1. Lig Seçimi</label>
+          <div class="custom-select" id="leagueSelectContainer">
+            <div class="select-display" id="leagueDisplay">
+              <div class="flex items-center gap-3">
+                <div id="selectedLeagueLogo" class="w-6 h-6"></div>
+                <span id="selectedLeagueText">-- Ligi Seçiniz --</span>
+              </div>
+              <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+            <div class="select-options" id="leagueOptions"></div>
+            <input type="hidden" id="leagueSelect" value="">
+          </div>
+        </div>
+
+        <!-- Match Selection (Custom Dropdown) -->
+        <div class="mb-8">
+          <label class="block text-purple-400 mb-3 text-sm sm:text-base font-semibold">2. Maç Seçimi</label>
+          <div class="custom-select" id="matchSelectContainer" style="opacity: 0.5; pointer-events: none;">
+            <div class="select-display" id="matchDisplay">
+              <div id="selectedMatchText">Önce ligi seçiniz</div>
+              <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+            <div class="select-options" id="matchOptions"></div>
+            <input type="hidden" id="matchSelect" value="">
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button id="showPrediction" disabled
+          class="w-full py-4 sm:py-5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 font-bold text-base sm:text-lg disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all duration-300 shadow-xl shadow-pink-500/30 animated-gradient">
+          TAHMİNİ GÖSTER
+        </button>
+        
+        <!-- Prediction Result Container -->
+        <div id="predictionResult" class="mt-8"></div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Footer -->
+  <div id="footer"></div>
+  
+  <!-- JavaScript -->
+  <script src="/js/logos.js"></script>
+  <script src="/js/load-components.js"></script>
+  <script src="/js/mobile-menu.js"></script>
+ <script>
+
+function renderLogo(src, className = "w-6 h-6") {
+  if (!src) return "";
+  return `
+    <img 
+      src="${src}" 
+      class="${className} object-contain"
+      loading="lazy"
+      onerror="this.style.display='none'"
+    />
+  `;
+}
+
+/* -------------------------------------------------
+   LOG YÜKLEME KONTROL
+------------------------------------------------- */
+console.log("League logos:", window.LEAGUE_LOGOS);
+console.log("Team logos:", window.TEAM_LOGOS);
+
+/* -------------------------------------------------
+   TAHMİN VERİLERİ (DÜZELTİLMİŞ İSİMLER)
+------------------------------------------------- */
+const PREDICTION_DATA = {
+  "Premier League": [
+    "Tottenham vs Brentford",
+    "Arsenal vs Chelsea",
+    "Manchester United vs Liverpool",
+    "Manchester City vs Everton"
+  ],
+  "La Liga": [
+    "Barcelona vs Sevilla",
+    "Real Madrid vs Villarreal",
+    "Atletico Madrid vs Valencia",
+    "Real Sociedad vs Athletic Bilbao"
+  ],
+  "Serie A": [
+    "Inter vs Milan",
+    "Juventus vs Roma",
+    "Napoli vs Lazio",
+    "Atalanta vs Fiorentina"
+  ],
+  "Bundesliga": [
+    "Bayern Munich vs Borussia Dortmund",
+    "RB Leipzig vs Bayer Leverkusen",
+    "Wolfsburg vs Eintracht Frankfurt"
+  ],
+  "Ligue 1": [
+    "PSG vs Marseille",
+    "Lyon vs Monaco",
+    "Lille vs Nice"
+  ]
+};
+
+/* -------------------------------------------------
+   DOM READY
+------------------------------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const leagueOptions = document.getElementById("leagueOptions");
+  const leagueDisplay = document.getElementById("leagueDisplay");
+  const leagueHidden = document.getElementById("leagueSelect");
+  const selectedLeagueLogo = document.getElementById("selectedLeagueLogo");
+  const selectedLeagueText = document.getElementById("selectedLeagueText");
+
+  const matchContainer = document.getElementById("matchSelectContainer");
+  const matchOptions = document.getElementById("matchOptions");
+  const matchDisplay = document.getElementById("matchDisplay");
+  const matchHidden = document.getElementById("matchSelect");
+  const selectedMatchText = document.getElementById("selectedMatchText");
+
+  const showPredictionBtn = document.getElementById("showPrediction");
+  const predictionResult = document.getElementById("predictionResult");
+
+  /* -------------------------------------------------
+     LİG SEÇENEKLERİ
+  ------------------------------------------------- */
+  Object.keys(PREDICTION_DATA).forEach(league => {
+    const option = document.createElement("div");
+    option.className = "select-option";
+    option.innerHTML = `
+      <div class="flex items-center gap-3">
+        ${renderLogo(window.LEAGUE_LOGOS?.[league])}
+        <span>${league}</span>
+      </div>
+    `;
+
+    option.onclick = () => {
+      leagueHidden.value = league;
+      selectedLeagueText.textContent = league;
+      selectedLeagueLogo.innerHTML = renderLogo(
+        window.LEAGUE_LOGOS?.[league]
+      );
+
+      leagueOptions.style.display = "none";
+
+      matchContainer.style.opacity = "1";
+      matchContainer.style.pointerEvents = "auto";
+      matchOptions.innerHTML = "";
+      selectedMatchText.textContent = "-- Maç Seçiniz --";
+      matchHidden.value = "";
+      showPredictionBtn.disabled = true;
+      predictionResult.innerHTML = "";
+
+      PREDICTION_DATA[league].forEach(match => {
+        const [team1, team2] = match.split(" vs ");
+        const team1Logo = window.TEAM_LOGOS?.[team1];
+        const team2Logo = window.TEAM_LOGOS?.[team2];
+
+        const matchOption = document.createElement("div");
+        matchOption.className = "select-option";
+        matchOption.innerHTML = `
+          <div class="team-display">
+            <div class="team-item">
+              ${renderLogo(team1Logo, "w-5 h-5")}
+              <span>${team1}</span>
+            </div>
+            <div class="vs-text">vs</div>
+            <div class="team-item">
+              ${renderLogo(team2Logo, "w-5 h-5")}
+              <span>${team2}</span>
+            </div>
+          </div>
+        `;
+
+        matchOption.onclick = () => {
+          matchHidden.value = match;
+          selectedMatchText.innerHTML = matchOption.innerHTML;
+          matchOptions.style.display = "none";
+          showPredictionBtn.disabled = false;
+        };
+
+        matchOptions.appendChild(matchOption);
+      });
+    };
+
+    leagueOptions.appendChild(option);
+  });
+
+  /* -------------------------------------------------
+     DROPDOWN KONTROLLERİ
+  ------------------------------------------------- */
+  leagueDisplay.onclick = e => {
+    e.stopPropagation();
+    leagueOptions.style.display =
+      leagueOptions.style.display === "block" ? "none" : "block";
+    matchOptions.style.display = "none";
+  };
+
+  matchDisplay.onclick = e => {
+    e.stopPropagation();
+    if (matchContainer.style.pointerEvents === "none") return;
+    matchOptions.style.display =
+      matchOptions.style.display === "block" ? "none" : "block";
+    leagueOptions.style.display = "none";
+  };
+
+  document.onclick = () => {
+    leagueOptions.style.display = "none";
+    matchOptions.style.display = "none";
+  };
+
+  /* -------------------------------------------------
+     TAHMİN BUTONU
+  ------------------------------------------------- */
+  showPredictionBtn.onclick = () => {
+    const match = matchHidden.value;
+    if (!match) return;
+
+    const [team1, team2] = match.split(" vs ");
+    const league = leagueHidden.value;
+
+    showPredictionBtn.disabled = true;
+    showPredictionBtn.textContent = "Tahmin hazırlanıyor...";
+
+    setTimeout(() => {
+      predictionResult.innerHTML = `
+        <div class="rounded-3xl p-6 border border-cyan-500/30">
+          <div class="flex items-center gap-3 mb-4">
+            ${renderLogo(window.LEAGUE_LOGOS?.[league])}
+            <h3 class="text-xl font-bold">${league}</h3>
+          </div>
+
+          <div class="flex justify-between my-6">
+            <div class="text-center">
+              ${renderLogo(window.TEAM_LOGOS?.[team1], "w-12 h-12")}
+              <p>${team1}</p>
+            </div>
+            <div class="text-xl">VS</div>
+            <div class="text-center">
+              ${renderLogo(window.TEAM_LOGOS?.[team2], "w-12 h-12")}
+              <p>${team2}</p>
+            </div>
+          </div>
+
+          <p class="text-center text-green-400 font-bold">
+            Tahmin: ${team1} kazanır
+          </p>
+        </div>
+      `;
+
+      showPredictionBtn.disabled = false;
+      showPredictionBtn.textContent = "Tahmini Göster";
+      predictionResult.scrollIntoView({ behavior: "smooth" });
+    }, 1200);
+  };
+});
+</script>
+
+</body>
+</html>
