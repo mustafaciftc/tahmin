@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8">
-  <title>Piyasa Değerleri | thetahmin.com</title>
+  <title>İstatistik | thetahmin.com</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,57 +17,100 @@
   <!-- Main Content -->
   <main class="pt-24 pb-16 px-4 sm:px-6">
     <div class="max-w-7xl mx-auto">
+      
       <!-- Filter Section -->
       <div class="gradient-border mb-8">
         <div class="bg-gradient-to-br from-[#0B0E1A] to-[#0E1225] rounded-2xl p-6">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
+
             <!-- Lig Seçimi -->
-            <div>
-              <label class="block text-gray-300 mb-2 font-semibold">
-                <i class="fas fa-trophy mr-2 text-cyan-400"></i>Lig
+            <div class="flex flex-col">
+              <label class="flex items-center text-gray-300 text-xs font-semibold uppercase tracking-wider mb-2">
+                <i class="fas fa-trophy text-cyan-400 w-4 h-4 mr-2"></i>
+                Lig
               </label>
-              <select id="ligSelect" class="select-style">
-                <option value="">Lig Seç</option>
-                <option value="premier">Premier League</option>
-                <option value="laliga">La Liga</option>
-                <option value="bundesliga">Bundesliga</option>
-                <option value="seriea">Serie A</option>
-                <option value="ligue1">Ligue 1</option>
-              </select>
+              <div class="custom-dropdown" id="ligSelectContainer">
+                <div id="ligDisplay"
+                  class="h-12 flex items-center justify-between px-4 bg-[#0F172A]/90 border border-cyan-500/20 rounded-xl cursor-pointer hover:border-cyan-500/50 transition-all duration-200">
+                  <div class="flex items-center gap-3">
+                    <div id="selectedLigLogo"
+                      class="w-8 h-8 rounded-lg overflow-hidden bg-gray-800/50 flex items-center justify-center">
+                      <img src="" class="w-full h-full object-contain hidden" alt="Lig Logo">
+                    </div>
+                    <span id="selectedLigText" class="text-white font-medium">Premier League</span>
+                  </div>
+                  <svg class="w-5 h-5 text-cyan-400 transition-transform duration-300" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+                <div class="custom-dropdown-options hidden mt-2" id="ligOptions"></div>
+                <input type="hidden" id="ligSelect" name="lig" value="premier">
+              </div>
             </div>
-            
+
             <!-- Sezon Seçimi -->
-            <div>
-              <label class="block text-gray-300 mb-2 font-semibold">
-                <i class="fas fa-calendar mr-2 text-cyan-400"></i>Sezon
+            <div class="flex flex-col">
+              <label class="flex items-center text-gray-300 text-xs font-semibold uppercase tracking-wider mb-2">
+                <i class="fas fa-calendar text-cyan-400 w-4 h-4 mr-2"></i>
+                Sezon
               </label>
-              <select id="sezonSelect" class="select-style">
-                <option value="2025">2024/25</option>
-                <option value="2024">2023/24</option>
-                <option value="2023">2022/23</option>
-              </select>
+              <div class="relative h-12">
+                <div class="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 pointer-events-none">
+                  <i class="fas fa-calendar text-base"></i>
+                </div>
+                <select id="sezonSelect"
+                  class="w-full h-full pl-12 pr-10 bg-[#0F172A]/90 border border-cyan-500/20 rounded-xl text-white font-medium appearance-none cursor-pointer hover:border-cyan-500/50 focus:border-cyan-500/70 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200">
+                  <option value="2025" selected>2024/25</option>
+                  <option value="2024">2023/24</option>
+                  <option value="2022">2022/23</option>
+                </select>
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-cyan-400 pointer-events-none">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </div>
             </div>
-            
+
             <!-- Pozisyon Seçimi -->
-            <div>
-              <label class="block text-gray-300 mb-2 font-semibold">
-                <i class="fas fa-running mr-2 text-cyan-400"></i>Pozisyon
+            <div class="flex flex-col">
+              <label class="flex items-center text-gray-300 text-xs font-semibold uppercase tracking-wider mb-2">
+                <i class="fas fa-running text-cyan-400 w-4 h-4 mr-2"></i>
+                Pozisyon
               </label>
-              <select id="pozisyonSelect" class="select-style">
-                <option value="all">Tüm Pozisyonlar</option>
-                <option value="Forvet">Forvet</option>
-                <option value="Orta Saha">Orta Saha</option>
-                <option value="Defans">Defans</option>
-                <option value="Kaleci">Kaleci</option>
-              </select>
+              <div class="relative h-12">
+                <div class="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 pointer-events-none">
+                  <i class="fas fa-running text-base"></i>
+                </div>
+                <select id="pozisyonSelect"
+                  class="w-full h-full pl-12 pr-10 bg-[#0F172A]/90 border border-cyan-500/20 rounded-xl text-white font-medium appearance-none cursor-pointer hover:border-cyan-500/50 focus:border-cyan-500/70 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200">
+                  <option value="all" selected>Tüm Pozisyonlar</option>
+                  <option value="Forvet">Forvet</option>
+                  <option value="Orta Saha">Orta Saha</option>
+                  <option value="Defans">Defans</option>
+                  <option value="Kaleci">Kaleci</option>
+                </select>
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-cyan-400 pointer-events-none">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </div>
             </div>
-            
+
             <!-- Göster Butonu -->
-            <div class="flex items-end">
-              <button id="gosterBtn" class="w-full px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 font-bold hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/30">
-                <i class="fas fa-search mr-2"></i>Göster
+            <div class="flex flex-col justify-end">
+              <button id="gosterBtn"
+                class="h-12 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold rounded-xl flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <span>Göster</span>
               </button>
             </div>
+
           </div>
         </div>
       </div>
@@ -123,7 +167,8 @@
         <div class="gradient-border">
           <div class="bg-gradient-to-br from-[#0B0E1A] to-[#0E1225] rounded-2xl overflow-hidden">
             <!-- Table Header (only for kompakt view) -->
-            <div id="tableHeader" class="bg-gradient-to-r from-cyan-900/30 to-purple-900/30 px-6 py-4 grid grid-cols-12 gap-4 text-sm font-bold text-gray-300 border-b border-cyan-500/20">
+            <div id="tableHeader"
+              class="bg-gradient-to-r from-cyan-900/30 to-purple-900/30 px-6 py-4 grid grid-cols-12 gap-4 text-sm font-bold text-gray-300 border-b border-cyan-500/20">
               <div class="col-span-1 text-center">#</div>
               <div class="col-span-4">Oyuncu</div>
               <div class="col-span-2 text-center hidden md:block">Uyruk</div>
@@ -147,13 +192,18 @@
 
             <!-- Pagination -->
             <div class="flex justify-center items-center space-x-2 p-6 border-t border-gray-800/50">
-              <button class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">
+              <button
+                class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">
                 <i class="fas fa-chevron-left"></i>
               </button>
-              <button class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center font-bold">1</button>
-              <button class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">2</button>
-              <button class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">3</button>
-              <button class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">
+              <button
+                class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center font-bold">1</button>
+              <button
+                class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">2</button>
+              <button
+                class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">3</button>
+              <button
+                class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">
                 <i class="fas fa-chevron-right"></i>
               </button>
             </div>
@@ -177,11 +227,178 @@
 
   <!-- Footer placeholder -->
   <div id="footer"></div>
- <!-- JavaScript -->
+  <!-- JavaScript -->
+  <script src="/js/logos.js"></script>
   <script src="/js/load-components.js"></script>
   <script src="/js/mobile-menu.js"></script>
+
   <script>
-    // Enhanced sample data with more players and stats
+    // Lig dropdown'ını güncelleyen JavaScript
+    document.addEventListener("DOMContentLoaded", () => {
+      const ligDropdown = {
+        init() {
+          this.container = document.getElementById('ligSelectContainer');
+          this.display = document.getElementById('ligDisplay');
+          this.options = document.getElementById('ligOptions');
+          this.selectedLogo = document.getElementById('selectedLigLogo');
+          this.selectedText = document.getElementById('selectedLigText');
+          this.hiddenInput = document.getElementById('ligSelect');
+          // Element seçimlerini güncelleyin
+          const sezonSelect = document.getElementById('sezonSelect');
+          const pozisyonSelect = document.getElementById('pozisyonSelect');
+
+          // Filter data fonksiyonunu güncelleyin
+          function filterData() {
+            const lig = document.getElementById('ligSelect').value;
+            const sezon = sezonSelect.value;
+            const pozisyon = pozisyonSelect.value;
+
+            let data = [...sampleData[lig]];
+
+            if (pozisyon !== 'all') {
+              data = data.filter(player => player.position === pozisyon);
+            }
+
+            // Sezon filtresi (örnek uygulama)
+            // Gerçek verilerde sezona göre de filtreleme yapabilirsiniz
+            console.log(`Seçilen sezon: ${sezon}`);
+
+            return data;
+          }
+
+          if (!this.container) return;
+
+          this.createOptions();
+          this.bindEvents();
+          this.setDefault();
+        },
+
+        createOptions() {
+          const ligBilgileri = [
+            { value: "premier", name: "Premier League", logo: window.LEAGUE_LOGOS?.["Premier League"] },
+            { value: "laliga", name: "La Liga", logo: window.LEAGUE_LOGOS?.["La Liga"] },
+            { value: "bundesliga", name: "Bundesliga", logo: window.LEAGUE_LOGOS?.["Bundesliga"] },
+            { value: "seriea", name: "Serie A", logo: window.LEAGUE_LOGOS?.["Serie A"] },
+            { value: "ligue1", name: "Ligue 1", logo: window.LEAGUE_LOGOS?.["Ligue 1"] }
+          ];
+
+          ligBilgileri.forEach(lig => {
+            const option = document.createElement("div");
+            option.className = "custom-dropdown-option";
+            option.dataset.value = lig.value;
+
+            option.innerHTML = `
+          <div class="flex items-center gap-3 w-full">
+            ${lig.logo ? `
+              <img src="${lig.logo}" class="w-6 h-6 object-contain" 
+                   loading="lazy" onerror="this.style.display='none'">
+            ` : '<div class="w-6 h-6"></div>'}
+            <span class="text-white font-medium">${lig.name}</span>
+          </div>
+        `;
+
+            option.addEventListener('click', () => this.selectOption(lig, option));
+            this.options.appendChild(option);
+          });
+        },
+
+        selectOption(lig, optionElement) {
+          this.hiddenInput.value = lig.value;
+          this.selectedText.textContent = lig.name;
+          this.selectedLogo.innerHTML = lig.logo ? `
+        <img src="${lig.logo}" class="w-6 h-6 object-contain" 
+             loading="lazy" onerror="this.style.display='none'">
+      ` : '';
+
+          // Aktif sınıfını güncelle
+          this.options.querySelectorAll('.custom-dropdown-option').forEach(opt => {
+            opt.classList.remove('active');
+          });
+          optionElement.classList.add('active');
+
+          this.closeDropdown();
+
+          // Change event'i tetikle
+          this.hiddenInput.dispatchEvent(new Event('change'));
+        },
+
+        setDefault() {
+          const premierOption = this.options.querySelector('[data-value="premier"]');
+          if (premierOption) {
+            premierOption.click();
+          }
+        },
+
+        bindEvents() {
+          // Dropdown aç/kapa
+          this.display.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleDropdown();
+          });
+
+          // Dışarı tıklayınca kapat
+          document.addEventListener('click', (e) => {
+            if (!this.container.contains(e.target)) {
+              this.closeDropdown();
+            }
+          });
+
+          // Esc tuşuyla kapat
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              this.closeDropdown();
+            }
+          });
+        },
+
+        toggleDropdown() {
+          const isOpen = this.options.style.display === 'block';
+          this.options.style.display = isOpen ? 'none' : 'block';
+          this.display.classList.toggle('border-cyan-400', !isOpen);
+        },
+
+        closeDropdown() {
+          this.options.style.display = 'none';
+          this.display.classList.remove('border-cyan-400');
+        },
+
+        getSelectedValue() {
+          return this.hiddenInput.value;
+        }
+      };
+
+      // Dropdown'ı başlat
+      ligDropdown.init();
+
+      // Göster butonu için loading state
+      const gosterBtn = document.getElementById('gosterBtn');
+      if (gosterBtn) {
+        gosterBtn.addEventListener('click', function () {
+          const ligValue = document.getElementById('ligSelect').value;
+
+          if (!ligValue) {
+            alert('Lütfen bir lig seçin!');
+            return;
+          }
+
+          // Loading state
+          this.classList.add('loading');
+          this.disabled = true;
+
+          // Simüle edilmiş loading
+          setTimeout(() => {
+            this.classList.remove('loading');
+            this.disabled = false;
+
+            // loadData fonksiyonunu çağır
+            if (typeof window.loadData === 'function') {
+              window.loadData();
+            }
+          }, 800);
+        });
+      }
+    });
+
     const sampleData = {
       premier: [
         { rank: 1, name: "Erling Haaland", country: "🇳🇴 Norveç", age: 24, club: "Manchester City", position: "Forvet", value: "180 mil. €", goals: 28, assists: 6, matches: 32, image: "https://img.a.transfermarkt.technology/portrait/big/418560-1694609670.jpg" },
@@ -258,7 +475,7 @@
       const goalsSorted = [...data].sort((a, b) => b.goals - a.goals).slice(0, 5);
       // Sort by assists
       const assistsSorted = [...data].sort((a, b) => b.assists - a.assists).slice(0, 5);
-      
+
       // Render goals leaders
       goalsLeaders.innerHTML = goalsSorted.map((player, index) => `
         <div class="leaderboard-item p-3 flex items-center justify-between">
@@ -277,7 +494,7 @@
           </div>
         </div>
       `).join('');
-      
+
       // Render assists leaders
       assistsLeaders.innerHTML = assistsSorted.map((player, index) => `
         <div class="leaderboard-item p-3 flex items-center justify-between">
@@ -450,25 +667,25 @@
     function filterData() {
       const lig = ligSelect.value;
       const pozisyon = pozisyonSelect.value;
-      
+
       let data = [...sampleData[lig]];
-      
+
       if (pozisyon !== 'all') {
         data = data.filter(player => player.position === pozisyon);
       }
-      
+
       return data;
     }
 
     // Load data
     function loadData() {
       showLoading();
-      
+
       setTimeout(() => {
         currentData = filterData();
         renderPlayers(currentData);
         renderLeaders(currentData);
-        
+
         emptyState.classList.add('hidden');
         resultsSection.classList.remove('hidden');
       }, 800);
@@ -477,12 +694,12 @@
     // Sort data
     function sortData(field) {
       if (currentData.length === 0) return;
-      
+
       const direction = sortDirection[field];
-      
+
       currentData.sort((a, b) => {
         let valA, valB;
-        
+
         if (field === 'age') {
           valA = a.age;
           valB = b.age;
@@ -490,21 +707,21 @@
           valA = parseFloat(a.value.replace(/[^\d.]/g, ''));
           valB = parseFloat(b.value.replace(/[^\d.]/g, ''));
         }
-        
+
         if (direction === 'asc') {
           return valA - valB;
         } else {
           return valB - valA;
         }
       });
-      
+
       sortDirection[field] = direction === 'asc' ? 'desc' : 'asc';
       renderPlayers(currentData);
     }
 
     // Event listeners
     gosterBtn.addEventListener('click', loadData);
-    
+
     document.getElementById('sortAge')?.addEventListener('click', () => sortData('age'));
     document.getElementById('sortValue')?.addEventListener('click', () => sortData('value'));
 
@@ -513,9 +730,9 @@
       button.addEventListener('click', () => {
         tabButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
-        
+
         currentView = button.getAttribute('data-tab');
-        
+
         if (currentData.length > 0) {
           renderPlayers(currentData);
         }
@@ -530,4 +747,5 @@
     });
   </script>
 </body>
+
 </html>

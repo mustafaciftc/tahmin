@@ -2,54 +2,53 @@
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
-    const menuItems = document.querySelectorAll('.mobile-menu-item');
-    
-    // Debug için
-    console.log('Menu elements:', { menuBtn, mobileMenu, menuIcon, menuItems });
 
-    if (menuBtn && mobileMenu) {
-      console.log('Mobile menu functionality initialized');
-      
-      menuBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Menu button clicked');
-        
-        // Toggle visibility
-        const isHidden = mobileMenu.classList.contains('hidden');
-        console.log('Is menu hidden?', isHidden);
-        
-        if (isHidden) {
-          mobileMenu.classList.remove('hidden');
-          mobileMenu.classList.add('flex');
-          if (menuIcon) menuIcon.textContent = '✕';
-        } else {
-          mobileMenu.classList.add('hidden');
-          mobileMenu.classList.remove('flex');
-          if (menuIcon) menuIcon.textContent = '☰';
-        }
-      });
-      
-      // Close when clicking items
-      menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          mobileMenu.classList.remove('flex');
-          if (menuIcon) menuIcon.textContent = '☰';
-        });
-      });
-      
-      // Close when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!mobileMenu.classList.contains('hidden') && 
-            !mobileMenu.contains(e.target) && 
-            e.target !== menuBtn) {
-          mobileMenu.classList.add('hidden');
-          mobileMenu.classList.remove('flex');
-          if (menuIcon) menuIcon.textContent = '☰';
-        }
-      });
-    } else {
-      console.error('Menu elements not found!');
+    if (!menuBtn || !mobileMenu || !menuIcon) {
+      console.warn('Mobil menü elemanları bulunamadı.');
+      return;
     }
+
+    const openMenu = () => {
+      mobileMenu.classList.remove('hidden');
+      menuIcon.textContent = '✕'; // X ikonuna dönüş
+    };
+
+    const closeMenu = () => {
+      mobileMenu.classList.add('hidden');
+      menuIcon.textContent = '☰'; // Hamburger ikonuna geri dön
+    };
+
+    // Butona (hamburger veya X) tıklayınca aç/kapa
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      
+      if (mobileMenu.classList.contains('hidden')) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    });
+
+    // Menü içindeki linklere tıklayınca kapat
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+
+    // Dışarıya tıklayınca kapat
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.classList.contains('hidden') && 
+          !mobileMenu.contains(e.target) && 
+          !menuBtn.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Esc tuşu ile kapat (ekstra erişilebilirlik)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        closeMenu();
+      }
+    });
   });

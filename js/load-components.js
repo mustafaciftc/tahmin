@@ -33,52 +33,55 @@ function initializeMobileMenu() {
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
-    const menuItems = document.querySelectorAll('.mobile-menu-item');
-    
-    console.log('Initializing mobile menu...', { menuBtn, mobileMenu, menuIcon });
 
-    if (menuBtn && mobileMenu) {
-        console.log('Mobile menu elements found, adding listeners...');
-        
-        menuBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Menu button clicked');
-            
-            const isHidden = mobileMenu.classList.contains('hidden');
-            console.log('Is menu hidden?', isHidden);
-            
-            if (isHidden) {
-                mobileMenu.classList.remove('hidden');
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        });
-        
-        // Close when clicking items
-        menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            });
-        });
-        
-        // Close when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.classList.contains('hidden') && 
-                !mobileMenu.contains(e.target) && 
-                e.target !== menuBtn) {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        });
-    } else {
-        console.warn('Mobile menu elements not found, check your HTML structure');
+    if (!menuBtn || !mobileMenu || !menuIcon) {
+        console.warn('Mobil menü elemanları bulunamadı – header henüz yüklenmemiş olabilir.');
+        return;
     }
+
+    console.log('Mobil menü başlatıldı');
+
+    const openMenu = () => {
+        mobileMenu.classList.remove('hidden');
+        menuIcon.textContent = '✕'; // X karakteri
+        document.body.style.overflow = 'hidden'; // arkadaki kaymayı engelle
+    };
+
+    const closeMenu = () => {
+        mobileMenu.classList.add('hidden');
+        menuIcon.textContent = '☰'; // hamburger
+        document.body.style.overflow = '';
+    };
+
+    // Toggle butonu (hamburger veya X'e tıklayınca)
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (mobileMenu.classList.contains('hidden')) {
+            openMenu();
+        } else {
+            closeMenu();
+        }
+    });
+
+    // Menü içindeki linklere tıklayınca kapat
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Dışarı tıklayınca kapat
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.classList.contains('hidden') &&
+            !mobileMenu.contains(e.target) &&
+            !menuBtn.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Esc tuşu ile kapat
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+            closeMenu();
+        }
+    });
 }
