@@ -232,7 +232,7 @@
   <script src="/js/load-components.js"></script>
   <script src="/js/mobile-menu.js"></script>
 
-  <script>
+ <script>
     // Lig dropdown'ını güncelleyen JavaScript
     document.addEventListener("DOMContentLoaded", () => {
       const ligDropdown = {
@@ -399,45 +399,117 @@
       }
     });
 
+    // Görsel yükleme için yardımcı fonksiyon
+    const getPlayerImage = (playerName) => {
+      // Transfermarkt görsel URL'lerini doğrudan kullan
+      const imageMap = {
+        // Premier League
+        "Erling Haaland": "https://img.a.transfermarkt.technology/portrait/medium/418560-1694609670.jpg",
+        "Mohamed Salah": "https://img.a.transfermarkt.technology/portrait/medium/148455-1667830243.jpg",
+        "Bukayo Saka": "https://img.a.transfermarkt.technology/portrait/medium/433177-1694609710.jpg",
+        "Cole Palmer": "https://img.a.transfermarkt.technology/portrait/medium/568498-1694609796.jpg",
+        "Declan Rice": "https://img.a.transfermarkt.technology/portrait/medium/357662-1664353748.jpg",
+        "Kevin De Bruyne": "https://img.a.transfermarkt.technology/portrait/medium/88755-1664353733.jpg",
+        "Son Heung-min": "https://img.a.transfermarkt.technology/portrait/medium/91845-1694609725.jpg",
+        "Phil Foden": "https://img.a.transfermarkt.technology/portrait/medium/406635-1694609704.jpg",
+        
+        // La Liga
+        "Jude Bellingham": "https://img.a.transfermarkt.technology/portrait/medium/581678-1683201308.jpg",
+        "Vinícius Júnior": "https://img.a.transfermarkt.technology/portrait/medium/371998-1683201753.jpg",
+        "Robert Lewandowski": "https://img.a.transfermarkt.technology/portrait/medium/38253-1713173308.jpg",
+        "Lamine Yamal": "https://img.a.transfermarkt.technology/portrait/medium/880779-1694609745.jpg",
+        "Pedri": "https://img.a.transfermarkt.technology/portrait/medium/556732-1694609743.jpg",
+        "Antoine Griezmann": "https://img.a.transfermarkt.technology/portrait/medium/125781-1664353773.jpg",
+        
+        // Bundesliga
+        "Florian Wirtz": "https://img.a.transfermarkt.technology/portrait/medium/537123-1685519749.jpg",
+        "Jamal Musiala": "https://img.a.transfermarkt.technology/portrait/medium/580195-1694609641.jpg",
+        "Harry Kane": "https://img.a.transfermarkt.technology/portrait/medium/132098-1683201135.jpg",
+        "Xavi Simons": "https://img.a.transfermarkt.technology/portrait/medium/467600-1693468992.jpg",
+        "Serhou Guirassy": "https://img.a.transfermarkt.technology/portrait/medium/331202-1664353796.jpg",
+        
+        // Serie A
+        "Victor Osimhen": "https://img.a.transfermarkt.technology/portrait/medium/401923-1694609659.jpg",
+        "Lautaro Martínez": "https://img.a.transfermarkt.technology/portrait/medium/406625-1667856758.jpg",
+        "Rafael Leão": "https://img.a.transfermarkt.technology/portrait/medium/357164-1694088932.jpg",
+        "Khvicha Kvaratskhelia": "https://img.a.transfermarkt.technology/portrait/medium/602814-1664353795.jpg",
+        "Dusan Vlahovic": "https://img.a.transfermarkt.technology/portrait/medium/357498-1664353706.jpg",
+        
+        // Ligue 1
+        "Kylian Mbappé": "https://img.a.transfermarkt.technology/portrait/medium/342229-1703771647.jpg",
+        "Bradley Barcola": "https://img.a.transfermarkt.technology/portrait/medium/690779-1693469029.jpg",
+        "Gonçalo Ramos": "https://img.a.transfermarkt.technology/portrait/medium/478269-1689165853.jpg",
+        "Warren Zaïre-Emery": "https://img.a.transfermarkt.technology/portrait/medium/814618-1694609776.jpg",
+        "Alexandre Lacazette": "https://img.a.transfermarkt.technology/portrait/medium/93720-1667830166.jpg"
+      };
+      
+      // Alternatif isim formatları için kontrol
+      const alternativeNames = {
+        "C. Ronaldo": "https://img.a.transfermarkt.technology/portrait/medium/8198-1694590254.jpg",
+        "L. Messi": "https://img.a.transfermarkt.technology/portrait/medium/28003-1691247527.jpg",
+        "K. Mbappe": "https://img.a.transfermarkt.technology/portrait/medium/342229-1703771647.jpg",
+        "E. Haaland": "https://img.a.transfermarkt.technology/portrait/medium/418560-1694609670.jpg",
+        "K. De Bruyne": "https://img.a.transfermarkt.technology/portrait/medium/88755-1664353733.jpg",
+        "H. Kane": "https://img.a.transfermarkt.technology/portrait/medium/132098-1683201135.jpg",
+        "M. Salah": "https://img.a.transfermarkt.technology/portrait/medium/148455-1667830243.jpg",
+        "Vinicius Jr": "https://img.a.transfermarkt.technology/portrait/medium/371998-1683201753.jpg",
+        "J. Bellingham": "https://img.a.transfermarkt.technology/portrait/medium/581678-1683201308.jpg",
+        "P. Foden": "https://img.a.transfermarkt.technology/portrait/medium/406635-1694609704.jpg"
+      };
+      
+      // Önce direkt eşleşme
+      if (imageMap[playerName]) {
+        return imageMap[playerName];
+      }
+      
+      // Sonra alternatif isimler
+      if (alternativeNames[playerName]) {
+        return alternativeNames[playerName];
+      }
+      
+      // Varsayılan görsel
+      return "https://img.a.transfermarkt.technology/portrait/medium/default.jpg";
+    };
+
     const sampleData = {
       premier: [
-        { rank: 1, name: "Erling Haaland", country: "🇳🇴 Norveç", age: 24, club: "Manchester City", position: "Forvet", value: "180 mil. €", goals: 28, assists: 6, matches: 32, image: "https://img.a.transfermarkt.technology/portrait/big/418560-1694609670.jpg" },
-        { rank: 2, name: "Mohamed Salah", country: "🇪🇬 Mısır", age: 32, club: "Liverpool", position: "Forvet", value: "65 mil. €", goals: 19, assists: 12, matches: 30, image: "https://img.a.transfermarkt.technology/portrait/big/148455-1667830243.jpg" },
-        { rank: 3, name: "Bukayo Saka", country: "🇬🇧 İngiltere", age: 23, club: "Arsenal", position: "Orta Saha", value: "140 mil. €", goals: 14, assists: 9, matches: 33, image: "https://img.a.transfermarkt.technology/portrait/big/433177-1694609710.jpg" },
-        { rank: 4, name: "Cole Palmer", country: "🇬🇧 İngiltere", age: 22, club: "Chelsea", position: "Orta Saha", value: "90 mil. €", goals: 22, assists: 11, matches: 33, image: "https://img.a.transfermarkt.technology/portrait/big/568498-1694609796.jpg" },
-        { rank: 5, name: "Declan Rice", country: "🇬🇧 İngiltere", age: 25, club: "Arsenal", position: "Orta Saha", value: "120 mil. €", goals: 7, assists: 8, matches: 34, image: "https://img.a.transfermarkt.technology/portrait/big/357662-1664353748.jpg" },
-        { rank: 6, name: "Kevin De Bruyne", country: "🇧🇪 Belçika", age: 33, club: "Manchester City", position: "Orta Saha", value: "60 mil. €", goals: 4, assists: 18, matches: 22, image: "https://img.a.transfermarkt.technology/portrait/big/88755-1664353733.jpg" },
-        { rank: 7, name: "Son Heung-min", country: "🇰🇷 Güney Kore", age: 32, club: "Tottenham", position: "Forvet", value: "50 mil. €", goals: 17, assists: 10, matches: 31, image: "https://img.a.transfermarkt.technology/portrait/big/91845-1694609725.jpg" },
-        { rank: 8, name: "Phil Foden", country: "🇬🇧 İngiltere", age: 24, club: "Manchester City", position: "Orta Saha", value: "150 mil. €", goals: 18, assists: 8, matches: 34, image: "https://img.a.transfermarkt.technology/portrait/big/406635-1694609704.jpg" }
+        { rank: 1, name: "Erling Haaland", country: "🇳🇴 Norveç", age: 24, club: "Manchester City", position: "Forvet", value: "180 mil. €", goals: 28, assists: 6, matches: 32, image: getPlayerImage("Erling Haaland") },
+        { rank: 2, name: "Mohamed Salah", country: "🇪🇬 Mısır", age: 32, club: "Liverpool", position: "Forvet", value: "65 mil. €", goals: 19, assists: 12, matches: 30, image: getPlayerImage("Mohamed Salah") },
+        { rank: 3, name: "Bukayo Saka", country: "🇬🇧 İngiltere", age: 23, club: "Arsenal", position: "Orta Saha", value: "140 mil. €", goals: 14, assists: 9, matches: 33, image: getPlayerImage("Bukayo Saka") },
+        { rank: 4, name: "Cole Palmer", country: "🇬🇧 İngiltere", age: 22, club: "Chelsea", position: "Orta Saha", value: "90 mil. €", goals: 22, assists: 11, matches: 33, image: getPlayerImage("Cole Palmer") },
+        { rank: 5, name: "Declan Rice", country: "🇬🇧 İngiltere", age: 25, club: "Arsenal", position: "Orta Saha", value: "120 mil. €", goals: 7, assists: 8, matches: 34, image: getPlayerImage("Declan Rice") },
+        { rank: 6, name: "Kevin De Bruyne", country: "🇧🇪 Belçika", age: 33, club: "Manchester City", position: "Orta Saha", value: "60 mil. €", goals: 4, assists: 18, matches: 22, image: getPlayerImage("Kevin De Bruyne") },
+        { rank: 7, name: "Son Heung-min", country: "🇰🇷 Güney Kore", age: 32, club: "Tottenham", position: "Forvet", value: "50 mil. €", goals: 17, assists: 10, matches: 31, image: getPlayerImage("Son Heung-min") },
+        { rank: 8, name: "Phil Foden", country: "🇬🇧 İngiltere", age: 24, club: "Manchester City", position: "Orta Saha", value: "150 mil. €", goals: 18, assists: 8, matches: 34, image: getPlayerImage("Phil Foden") }
       ],
       laliga: [
-        { rank: 1, name: "Jude Bellingham", country: "🇬🇧 İngiltere", age: 21, club: "Real Madrid", position: "Orta Saha", value: "180 mil. €", goals: 19, assists: 6, matches: 28, image: "https://img.a.transfermarkt.technology/portrait/big/581678-1683201308.jpg" },
-        { rank: 2, name: "Vinícius Júnior", country: "🇧🇷 Brezilya", age: 24, club: "Real Madrid", position: "Forvet", value: "180 mil. €", goals: 21, assists: 9, matches: 32, image: "https://img.a.transfermarkt.technology/portrait/big/371998-1683201753.jpg" },
-        { rank: 3, name: "Robert Lewandowski", country: "🇵🇱 Polonya", age: 36, club: "Barcelona", position: "Forvet", value: "15 mil. €", goals: 23, assists: 2, matches: 31, image: "https://img.a.transfermarkt.technology/portrait/big/38253-1713173308.jpg" },
-        { rank: 4, name: "Lamine Yamal", country: "🇪🇸 İspanya", age: 17, club: "Barcelona", position: "Orta Saha", value: "120 mil. €", goals: 6, assists: 8, matches: 26, image: "https://img.a.transfermarkt.technology/portrait/big/880779-1694609745.jpg" },
-        { rank: 5, name: "Pedri", country: "🇪🇸 İspanya", age: 22, club: "Barcelona", position: "Orta Saha", value: "100 mil. €", goals: 3, assists: 5, matches: 22, image: "https://img.a.transfermarkt.technology/portrait/big/556732-1694609743.jpg" },
-        { rank: 6, name: "Antoine Griezmann", country: "🇫🇷 Fransa", age: 33, club: "Atletico Madrid", position: "Forvet", value: "25 mil. €", goals: 16, assists: 7, matches: 29, image: "https://img.a.transfermarkt.technology/portrait/big/125781-1664353773.jpg" }
+        { rank: 1, name: "Jude Bellingham", country: "🇬🇧 İngiltere", age: 21, club: "Real Madrid", position: "Orta Saha", value: "180 mil. €", goals: 19, assists: 6, matches: 28, image: getPlayerImage("Jude Bellingham") },
+        { rank: 2, name: "Vinícius Júnior", country: "🇧🇷 Brezilya", age: 24, club: "Real Madrid", position: "Forvet", value: "180 mil. €", goals: 21, assists: 9, matches: 32, image: getPlayerImage("Vinícius Júnior") },
+        { rank: 3, name: "Robert Lewandowski", country: "🇵🇱 Polonya", age: 36, club: "Barcelona", position: "Forvet", value: "15 mil. €", goals: 23, assists: 2, matches: 31, image: getPlayerImage("Robert Lewandowski") },
+        { rank: 4, name: "Lamine Yamal", country: "🇪🇸 İspanya", age: 17, club: "Barcelona", position: "Orta Saha", value: "120 mil. €", goals: 6, assists: 8, matches: 26, image: getPlayerImage("Lamine Yamal") },
+        { rank: 5, name: "Pedri", country: "🇪🇸 İspanya", age: 22, club: "Barcelona", position: "Orta Saha", value: "100 mil. €", goals: 3, assists: 5, matches: 22, image: getPlayerImage("Pedri") },
+        { rank: 6, name: "Antoine Griezmann", country: "🇫🇷 Fransa", age: 33, club: "Atletico Madrid", position: "Forvet", value: "25 mil. €", goals: 16, assists: 7, matches: 29, image: getPlayerImage("Antoine Griezmann") }
       ],
       bundesliga: [
-        { rank: 1, name: "Florian Wirtz", country: "🇩🇪 Almanya", age: 21, club: "Bayer Leverkusen", position: "Orta Saha", value: "130 mil. €", goals: 11, assists: 11, matches: 27, image: "https://img.a.transfermarkt.technology/portrait/big/537123-1685519749.jpg" },
-        { rank: 2, name: "Jamal Musiala", country: "🇩🇪 Almanya", age: 21, club: "Bayern Munich", position: "Orta Saha", value: "130 mil. €", goals: 10, assists: 6, matches: 24, image: "https://img.a.transfermarkt.technology/portrait/big/580195-1694609641.jpg" },
-        { rank: 3, name: "Harry Kane", country: "🇬🇧 İngiltere", age: 31, club: "Bayern Munich", position: "Forvet", value: "100 mil. €", goals: 32, assists: 7, matches: 31, image: "https://img.a.transfermarkt.technology/portrait/big/132098-1683201135.jpg" },
-        { rank: 4, name: "Xavi Simons", country: "🇳🇱 Hollanda", age: 21, club: "RB Leipzig", position: "Orta Saha", value: "80 mil. €", goals: 8, assists: 11, matches: 28, image: "https://img.a.transfermarkt.technology/portrait/big/467600-1693468992.jpg" },
-        { rank: 5, name: "Serhou Guirassy", country: "🇬🇳 Gine", age: 28, club: "VfB Stuttgart", position: "Forvet", value: "40 mil. €", goals: 26, assists: 3, matches: 26, image: "https://img.a.transfermarkt.technology/portrait/big/331202-1664353796.jpg" }
+        { rank: 1, name: "Florian Wirtz", country: "🇩🇪 Almanya", age: 21, club: "Bayer Leverkusen", position: "Orta Saha", value: "130 mil. €", goals: 11, assists: 11, matches: 27, image: getPlayerImage("Florian Wirtz") },
+        { rank: 2, name: "Jamal Musiala", country: "🇩🇪 Almanya", age: 21, club: "Bayern Munich", position: "Orta Saha", value: "130 mil. €", goals: 10, assists: 6, matches: 24, image: getPlayerImage("Jamal Musiala") },
+        { rank: 3, name: "Harry Kane", country: "🇬🇧 İngiltere", age: 31, club: "Bayern Munich", position: "Forvet", value: "100 mil. €", goals: 32, assists: 7, matches: 31, image: getPlayerImage("Harry Kane") },
+        { rank: 4, name: "Xavi Simons", country: "🇳🇱 Hollanda", age: 21, club: "RB Leipzig", position: "Orta Saha", value: "80 mil. €", goals: 8, assists: 11, matches: 28, image: getPlayerImage("Xavi Simons") },
+        { rank: 5, name: "Serhou Guirassy", country: "🇬🇳 Gine", age: 28, club: "VfB Stuttgart", position: "Forvet", value: "40 mil. €", goals: 26, assists: 3, matches: 26, image: getPlayerImage("Serhou Guirassy") }
       ],
       seriea: [
-        { rank: 1, name: "Victor Osimhen", country: "🇳🇬 Nijerya", age: 25, club: "Napoli", position: "Forvet", value: "100 mil. €", goals: 15, assists: 3, matches: 25, image: "https://img.a.transfermarkt.technology/portrait/big/401923-1694609659.jpg" },
-        { rank: 2, name: "Lautaro Martínez", country: "🇦🇷 Arjantin", age: 27, club: "Inter Milan", position: "Forvet", value: "110 mil. €", goals: 24, assists: 4, matches: 33, image: "https://img.a.transfermarkt.technology/portrait/big/406625-1667856758.jpg" },
-        { rank: 3, name: "Rafael Leão", country: "🇵🇹 Portekiz", age: 25, club: "AC Milan", position: "Forvet", value: "90 mil. €", goals: 10, assists: 8, matches: 30, image: "https://img.a.transfermarkt.technology/portrait/big/357164-1694088932.jpg" },
-        { rank: 4, name: "Khvicha Kvaratskhelia", country: "🇬🇪 Gürcistan", age: 23, club: "Napoli", position: "Orta Saha", value: "80 mil. €", goals: 11, assists: 8, matches: 34, image: "https://img.a.transfermarkt.technology/portrait/big/602814-1664353795.jpg" },
-        { rank: 5, name: "Dusan Vlahovic", country: "🇷🇸 Sırbistan", age: 24, club: "Juventus", position: "Forvet", value: "70 mil. €", goals: 16, assists: 4, matches: 33, image: "https://img.a.transfermarkt.technology/portrait/big/357498-1664353706.jpg" }
+        { rank: 1, name: "Victor Osimhen", country: "🇳🇬 Nijerya", age: 25, club: "Napoli", position: "Forvet", value: "100 mil. €", goals: 15, assists: 3, matches: 25, image: getPlayerImage("Victor Osimhen") },
+        { rank: 2, name: "Lautaro Martínez", country: "🇦🇷 Arjantin", age: 27, club: "Inter Milan", position: "Forvet", value: "110 mil. €", goals: 24, assists: 4, matches: 33, image: getPlayerImage("Lautaro Martínez") },
+        { rank: 3, name: "Rafael Leão", country: "🇵🇹 Portekiz", age: 25, club: "AC Milan", position: "Forvet", value: "90 mil. €", goals: 10, assists: 8, matches: 30, image: getPlayerImage("Rafael Leão") },
+        { rank: 4, name: "Khvicha Kvaratskhelia", country: "🇬🇪 Gürcistan", age: 23, club: "Napoli", position: "Orta Saha", value: "80 mil. €", goals: 11, assists: 8, matches: 34, image: getPlayerImage("Khvicha Kvaratskhelia") },
+        { rank: 5, name: "Dusan Vlahovic", country: "🇷🇸 Sırbistan", age: 24, club: "Juventus", position: "Forvet", value: "70 mil. €", goals: 16, assists: 4, matches: 33, image: getPlayerImage("Dusan Vlahovic") }
       ],
       ligue1: [
-        { rank: 1, name: "Kylian Mbappé", country: "🇫🇷 Fransa", age: 25, club: "PSG", position: "Forvet", value: "180 mil. €", goals: 27, assists: 7, matches: 29, image: "https://img.a.transfermarkt.technology/portrait/big/342229-1703771647.jpg" },
-        { rank: 2, name: "Bradley Barcola", country: "🇫🇷 Fransa", age: 21, club: "PSG", position: "Forvet", value: "50 mil. €", goals: 11, assists: 6, matches: 29, image: "https://img.a.transfermarkt.technology/portrait/big/690779-1693469029.jpg" },
-        { rank: 3, name: "Gonçalo Ramos", country: "🇵🇹 Portekiz", age: 23, club: "PSG", position: "Forvet", value: "60 mil. €", goals: 11, assists: 5, matches: 27, image: "https://img.a.transfermarkt.technology/portrait/big/478269-1689165853.jpg" },
-        { rank: 4, name: "Warren Zaïre-Emery", country: "🇫🇷 Fransa", age: 18, club: "PSG", position: "Orta Saha", value: "60 mil. €", goals: 4, assists: 4, matches: 30, image: "https://img.a.transfermarkt.technology/portrait/big/814618-1694609776.jpg" },
-        { rank: 5, name: "Alexandre Lacazette", country: "🇫🇷 Fransa", age: 33, club: "Lyon", position: "Forvet", value: "10 mil. €", goals: 19, assists: 8, matches: 28, image: "https://img.a.transfermarkt.technology/portrait/big/93720-1667830166.jpg" }
+        { rank: 1, name: "Kylian Mbappé", country: "🇫🇷 Fransa", age: 25, club: "PSG", position: "Forvet", value: "180 mil. €", goals: 27, assists: 7, matches: 29, image: getPlayerImage("Kylian Mbappé") },
+        { rank: 2, name: "Bradley Barcola", country: "🇫🇷 Fransa", age: 21, club: "PSG", position: "Forvet", value: "50 mil. €", goals: 11, assists: 6, matches: 29, image: getPlayerImage("Bradley Barcola") },
+        { rank: 3, name: "Gonçalo Ramos", country: "🇵🇹 Portekiz", age: 23, club: "PSG", position: "Forvet", value: "60 mil. €", goals: 11, assists: 5, matches: 27, image: getPlayerImage("Gonçalo Ramos") },
+        { rank: 4, name: "Warren Zaïre-Emery", country: "🇫🇷 Fransa", age: 18, club: "PSG", position: "Orta Saha", value: "60 mil. €", goals: 4, assists: 4, matches: 30, image: getPlayerImage("Warren Zaïre-Emery") },
+        { rank: 5, name: "Alexandre Lacazette", country: "🇫🇷 Fransa", age: 33, club: "Lyon", position: "Forvet", value: "10 mil. €", goals: 19, assists: 8, matches: 28, image: getPlayerImage("Alexandre Lacazette") }
       ]
     };
 
@@ -539,7 +611,7 @@
       }
     }
 
-    // Kompakt görünüm (görseldeki gibi)
+    // Kompakt görünüm
     function renderKompaktView(data) {
       playersList.innerHTML = `<div class="divide-y divide-gray-800/50">` + data.map(player => `
         <div class="player-row px-4 sm:px-6 py-4 grid grid-cols-12 gap-3 items-center text-sm hover:bg-gray-900/30 transition-colors">
@@ -551,8 +623,7 @@
           <div class="col-span-5 sm:col-span-4">
             <div class="flex items-center">
               <div class="w-10 h-10 rounded-full overflow-hidden mr-3 hidden sm:block">
-                <img src="${player.image}" alt="" class="w-full h-full object-cover" 
-                     onerror="this.src='https://via.placeholder.com/40/0B0E1A/00E5FF?text=${player.name.charAt(0)}'">
+                <img src="${player.image}" alt="${player.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3048/3048122.png'">
               </div>
               <div>
                 <div class="font-bold text-white truncate">${player.name}</div>
@@ -574,15 +645,14 @@
       `).join('') + `</div>`;
     }
 
-    // Detaylı görünüm (görseldeki gibi)
+    // Detaylı görünüm
     function renderDetayliView(data) {
       playersList.innerHTML = `<div class="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-4">` + data.map(player => `
-        <div class="player-card p-4">
+        <div class="player-card p-4 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 hover:scale-[1.02]">
           <div class="flex items-start">
             <div class="relative mr-4">
               <div class="w-20 h-20 rounded-xl overflow-hidden">
-                <img src="${player.image}" alt="" class="w-full h-full object-cover"
-                     onerror="this.src='https://via.placeholder.com/80/0B0E1A/00E5FF?text=${player.name.charAt(0)}'">
+                <img src="${player.image}" alt="${player.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3048/3048122.png'">
               </div>
               <div class="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center font-bold text-sm">
                 ${player.rank}
@@ -595,25 +665,25 @@
                   <div class="text-gray-400 text-sm">${player.country} • ${player.position}</div>
                 </div>
                 <div class="mt-2 sm:mt-0">
-                  <span class="value-badge">${player.value}</span>
+                  <span class="value-badge bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full font-bold text-sm">${player.value}</span>
                 </div>
               </div>
               <div class="text-cyan-400 font-semibold mb-4">${player.club}</div>
               
               <div class="grid grid-cols-4 gap-2">
-                <div class="stat-card p-3 text-center">
+                <div class="stat-card p-3 text-center bg-gray-800/50 rounded-lg">
                   <div class="text-xl font-bold text-white">${player.age}</div>
                   <div class="text-gray-500 text-xs">Yaş</div>
                 </div>
-                <div class="stat-card p-3 text-center">
+                <div class="stat-card p-3 text-center bg-gray-800/50 rounded-lg">
                   <div class="text-xl font-bold text-cyan-400">${player.goals}</div>
                   <div class="text-gray-500 text-xs">Gol</div>
                 </div>
-                <div class="stat-card p-3 text-center">
+                <div class="stat-card p-3 text-center bg-gray-800/50 rounded-lg">
                   <div class="text-xl font-bold text-purple-400">${player.assists}</div>
                   <div class="text-gray-500 text-xs">Asist</div>
                 </div>
-                <div class="stat-card p-3 text-center">
+                <div class="stat-card p-3 text-center bg-gray-800/50 rounded-lg">
                   <div class="text-xl font-bold text-pink-400">${player.matches}</div>
                   <div class="text-gray-500 text-xs">Maç</div>
                 </div>
@@ -629,20 +699,27 @@
       playersList.innerHTML = `
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 sm:p-6">
           ${data.map(player => `
-            <div class="player-card p-4 text-center">
+            <div class="player-card p-4 text-center bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 hover:scale-[1.02]">
               <div class="relative mb-4">
                 <div class="w-full h-48 rounded-xl overflow-hidden mb-3">
-                  <img src="${player.image}" alt="" class="w-full h-full object-cover object-top"
-                       onerror="this.src='https://via.placeholder.com/300/0B0E1A/00E5FF?text=Player'">
+                  <img 
+                    src="${player.image}" 
+                    alt="${player.name}"
+                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    loading="lazy"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/3048/3048122.png'"
+                  >
                 </div>
-                <div class="absolute top-3 left-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-3 py-1 rounded-full font-bold text-sm">
+                <div class="absolute top-3 left-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-3 py-1 rounded-full font-bold text-sm shadow-lg">
                   #${player.rank}
                 </div>
               </div>
               <h3 class="font-bold text-white text-lg mb-1 truncate">${player.name}</h3>
               <p class="text-gray-400 text-sm mb-2">${player.country} • ${player.position}</p>
               <p class="text-cyan-400 font-semibold mb-3 truncate">${player.club}</p>
-              <div class="value-badge inline-block mb-4">${player.value}</div>
+              <div class="value-badge inline-block mb-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full font-bold text-sm">
+                ${player.value}
+              </div>
               <div class="grid grid-cols-3 gap-2 pt-4 border-t border-gray-800/50">
                 <div>
                   <div class="text-lg font-bold text-white">${player.age}</div>
@@ -745,6 +822,9 @@
       currentData = [...sampleData.premier];
       renderLeaders(currentData);
     });
+
+    // Make loadData function globally available
+    window.loadData = loadData;
   </script>
 </body>
 
