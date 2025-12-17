@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Piyasa Değerleri | thetahmin.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body class="bg-[#0B0E1A] text-white overflow-x-hidden">
+  <!-- Header placeholder -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main class="pt-24 pb-16 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Filter Section -->
+      <div class="gradient-border mb-8">
+        <div class="bg-gradient-to-br from-[#0B0E1A] to-[#0E1225] rounded-2xl p-6">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <!-- Lig Seçimi -->
+            <div>
+              <label class="block text-gray-300 mb-2 font-semibold">
+                <i class="fas fa-trophy mr-2 text-cyan-400"></i>Lig
+              </label>
+              <select id="ligSelect" class="select-style">
+                <option value="">Lig Seç</option>
+                <option value="premier">Premier League</option>
+                <option value="laliga">La Liga</option>
+                <option value="bundesliga">Bundesliga</option>
+                <option value="seriea">Serie A</option>
+                <option value="ligue1">Ligue 1</option>
+              </select>
+            </div>
+            
+            <!-- Sezon Seçimi -->
+            <div>
+              <label class="block text-gray-300 mb-2 font-semibold">
+                <i class="fas fa-calendar mr-2 text-cyan-400"></i>Sezon
+              </label>
+              <select id="sezonSelect" class="select-style">
+                <option value="2025">2024/25</option>
+                <option value="2024">2023/24</option>
+                <option value="2023">2022/23</option>
+              </select>
+            </div>
+            
+            <!-- Pozisyon Seçimi -->
+            <div>
+              <label class="block text-gray-300 mb-2 font-semibold">
+                <i class="fas fa-running mr-2 text-cyan-400"></i>Pozisyon
+              </label>
+              <select id="pozisyonSelect" class="select-style">
+                <option value="all">Tüm Pozisyonlar</option>
+                <option value="Forvet">Forvet</option>
+                <option value="Orta Saha">Orta Saha</option>
+                <option value="Defans">Defans</option>
+                <option value="Kaleci">Kaleci</option>
+              </select>
+            </div>
+            
+            <!-- Göster Butonu -->
+            <div class="flex items-end">
+              <button id="gosterBtn" class="w-full px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 font-bold hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/30">
+                <i class="fas fa-search mr-2"></i>Göster
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div id="resultsSection" class="hidden">
+        <!-- Tabs -->
+        <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+          <button class="tab-button active" data-tab="kompakt">
+            <i class="fas fa-list mr-2"></i>Kompakt
+          </button>
+          <button class="tab-button" data-tab="detayli">
+            <i class="fas fa-table mr-2"></i>Detaylı
+          </button>
+          <button class="tab-button" data-tab="galeri">
+            <i class="fas fa-th mr-2"></i>Galeri
+          </button>
+        </div>
+
+        <!-- Leaders Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <!-- Gol Krallığı -->
+          <div class="gradient-border">
+            <div class="bg-gradient-to-br from-[#0B0E1A] to-[#0E1225] rounded-2xl p-6 h-full">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-white">
+                  <i class="fas fa-futbol text-cyan-400 mr-2"></i>Gol Krallığı
+                </h3>
+                <span class="text-sm text-gray-400">2024/25 Sezonu</span>
+              </div>
+              <div id="goalsLeaders" class="space-y-3">
+                <!-- Gol krallığı verileri buraya gelecek -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Asist Krallığı -->
+          <div class="gradient-border">
+            <div class="bg-gradient-to-br from-[#0B0E1A] to-[#0E1225] rounded-2xl p-6 h-full">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-white">
+                  <i class="fas fa-passport text-purple-400 mr-2"></i>Asist Krallığı
+                </h3>
+                <span class="text-sm text-gray-400">2024/25 Sezonu</span>
+              </div>
+              <div id="assistsLeaders" class="space-y-3">
+                <!-- Asist krallığı verileri buraya gelecek -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Table -->
+        <div class="gradient-border">
+          <div class="bg-gradient-to-br from-[#0B0E1A] to-[#0E1225] rounded-2xl overflow-hidden">
+            <!-- Table Header (only for kompakt view) -->
+            <div id="tableHeader" class="bg-gradient-to-r from-cyan-900/30 to-purple-900/30 px-6 py-4 grid grid-cols-12 gap-4 text-sm font-bold text-gray-300 border-b border-cyan-500/20">
+              <div class="col-span-1 text-center">#</div>
+              <div class="col-span-4">Oyuncu</div>
+              <div class="col-span-2 text-center hidden md:block">Uyruk</div>
+              <div class="col-span-2 text-center">Kulüp</div>
+              <div class="col-span-1 text-center hidden lg:block">
+                <button id="sortAge" class="hover:text-cyan-400 transition-colors">
+                  Yaş <i class="fas fa-sort ml-1"></i>
+                </button>
+              </div>
+              <div class="col-span-2 text-center">
+                <button id="sortValue" class="hover:text-cyan-400 transition-colors">
+                  Değer <i class="fas fa-sort ml-1"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Table Body -->
+            <div id="playersList">
+              <!-- Content will be inserted here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center items-center space-x-2 p-6 border-t border-gray-800/50">
+              <button class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center font-bold">1</button>
+              <button class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">2</button>
+              <button class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">3</button>
+              <button class="w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-800 flex items-center justify-center transition-colors">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="gradient-border">
+        <div class="bg-gradient-to-br from-[#0B0E1A] to-[#0E1225] rounded-2xl p-20">
+          <div class="text-center">
+            <i class="fas fa-chart-line text-6xl text-cyan-500/30 mb-6"></i>
+            <h3 class="text-2xl font-bold text-gray-300 mb-3">Piyasa Değerlerini Görüntüle</h3>
+            <p class="text-gray-400 mb-2">Lig, sezon ve pozisyon seçerek oyuncu verilerini listeleyin</p>
+            <p class="text-gray-500 text-sm">Filtreleme yaptıktan sonra "Göster" butonuna tıklayın</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer placeholder -->
+  <div id="footer"></div>
+ <!-- JavaScript -->
+  <script src="/js/load-components.js"></script>
+  <script src="/js/mobile-menu.js"></script>
+  <script>
+    // Enhanced sample data with more players and stats
+    const sampleData = {
+      premier: [
+        { rank: 1, name: "Erling Haaland", country: "🇳🇴 Norveç", age: 24, club: "Manchester City", position: "Forvet", value: "180 mil. €", goals: 28, assists: 6, matches: 32, image: "https://img.a.transfermarkt.technology/portrait/big/418560-1694609670.jpg" },
+        { rank: 2, name: "Mohamed Salah", country: "🇪🇬 Mısır", age: 32, club: "Liverpool", position: "Forvet", value: "65 mil. €", goals: 19, assists: 12, matches: 30, image: "https://img.a.transfermarkt.technology/portrait/big/148455-1667830243.jpg" },
+        { rank: 3, name: "Bukayo Saka", country: "🇬🇧 İngiltere", age: 23, club: "Arsenal", position: "Orta Saha", value: "140 mil. €", goals: 14, assists: 9, matches: 33, image: "https://img.a.transfermarkt.technology/portrait/big/433177-1694609710.jpg" },
+        { rank: 4, name: "Cole Palmer", country: "🇬🇧 İngiltere", age: 22, club: "Chelsea", position: "Orta Saha", value: "90 mil. €", goals: 22, assists: 11, matches: 33, image: "https://img.a.transfermarkt.technology/portrait/big/568498-1694609796.jpg" },
+        { rank: 5, name: "Declan Rice", country: "🇬🇧 İngiltere", age: 25, club: "Arsenal", position: "Orta Saha", value: "120 mil. €", goals: 7, assists: 8, matches: 34, image: "https://img.a.transfermarkt.technology/portrait/big/357662-1664353748.jpg" },
+        { rank: 6, name: "Kevin De Bruyne", country: "🇧🇪 Belçika", age: 33, club: "Manchester City", position: "Orta Saha", value: "60 mil. €", goals: 4, assists: 18, matches: 22, image: "https://img.a.transfermarkt.technology/portrait/big/88755-1664353733.jpg" },
+        { rank: 7, name: "Son Heung-min", country: "🇰🇷 Güney Kore", age: 32, club: "Tottenham", position: "Forvet", value: "50 mil. €", goals: 17, assists: 10, matches: 31, image: "https://img.a.transfermarkt.technology/portrait/big/91845-1694609725.jpg" },
+        { rank: 8, name: "Phil Foden", country: "🇬🇧 İngiltere", age: 24, club: "Manchester City", position: "Orta Saha", value: "150 mil. €", goals: 18, assists: 8, matches: 34, image: "https://img.a.transfermarkt.technology/portrait/big/406635-1694609704.jpg" }
+      ],
+      laliga: [
+        { rank: 1, name: "Jude Bellingham", country: "🇬🇧 İngiltere", age: 21, club: "Real Madrid", position: "Orta Saha", value: "180 mil. €", goals: 19, assists: 6, matches: 28, image: "https://img.a.transfermarkt.technology/portrait/big/581678-1683201308.jpg" },
+        { rank: 2, name: "Vinícius Júnior", country: "🇧🇷 Brezilya", age: 24, club: "Real Madrid", position: "Forvet", value: "180 mil. €", goals: 21, assists: 9, matches: 32, image: "https://img.a.transfermarkt.technology/portrait/big/371998-1683201753.jpg" },
+        { rank: 3, name: "Robert Lewandowski", country: "🇵🇱 Polonya", age: 36, club: "Barcelona", position: "Forvet", value: "15 mil. €", goals: 23, assists: 2, matches: 31, image: "https://img.a.transfermarkt.technology/portrait/big/38253-1713173308.jpg" },
+        { rank: 4, name: "Lamine Yamal", country: "🇪🇸 İspanya", age: 17, club: "Barcelona", position: "Orta Saha", value: "120 mil. €", goals: 6, assists: 8, matches: 26, image: "https://img.a.transfermarkt.technology/portrait/big/880779-1694609745.jpg" },
+        { rank: 5, name: "Pedri", country: "🇪🇸 İspanya", age: 22, club: "Barcelona", position: "Orta Saha", value: "100 mil. €", goals: 3, assists: 5, matches: 22, image: "https://img.a.transfermarkt.technology/portrait/big/556732-1694609743.jpg" },
+        { rank: 6, name: "Antoine Griezmann", country: "🇫🇷 Fransa", age: 33, club: "Atletico Madrid", position: "Forvet", value: "25 mil. €", goals: 16, assists: 7, matches: 29, image: "https://img.a.transfermarkt.technology/portrait/big/125781-1664353773.jpg" }
+      ],
+      bundesliga: [
+        { rank: 1, name: "Florian Wirtz", country: "🇩🇪 Almanya", age: 21, club: "Bayer Leverkusen", position: "Orta Saha", value: "130 mil. €", goals: 11, assists: 11, matches: 27, image: "https://img.a.transfermarkt.technology/portrait/big/537123-1685519749.jpg" },
+        { rank: 2, name: "Jamal Musiala", country: "🇩🇪 Almanya", age: 21, club: "Bayern Munich", position: "Orta Saha", value: "130 mil. €", goals: 10, assists: 6, matches: 24, image: "https://img.a.transfermarkt.technology/portrait/big/580195-1694609641.jpg" },
+        { rank: 3, name: "Harry Kane", country: "🇬🇧 İngiltere", age: 31, club: "Bayern Munich", position: "Forvet", value: "100 mil. €", goals: 32, assists: 7, matches: 31, image: "https://img.a.transfermarkt.technology/portrait/big/132098-1683201135.jpg" },
+        { rank: 4, name: "Xavi Simons", country: "🇳🇱 Hollanda", age: 21, club: "RB Leipzig", position: "Orta Saha", value: "80 mil. €", goals: 8, assists: 11, matches: 28, image: "https://img.a.transfermarkt.technology/portrait/big/467600-1693468992.jpg" },
+        { rank: 5, name: "Serhou Guirassy", country: "🇬🇳 Gine", age: 28, club: "VfB Stuttgart", position: "Forvet", value: "40 mil. €", goals: 26, assists: 3, matches: 26, image: "https://img.a.transfermarkt.technology/portrait/big/331202-1664353796.jpg" }
+      ],
+      seriea: [
+        { rank: 1, name: "Victor Osimhen", country: "🇳🇬 Nijerya", age: 25, club: "Napoli", position: "Forvet", value: "100 mil. €", goals: 15, assists: 3, matches: 25, image: "https://img.a.transfermarkt.technology/portrait/big/401923-1694609659.jpg" },
+        { rank: 2, name: "Lautaro Martínez", country: "🇦🇷 Arjantin", age: 27, club: "Inter Milan", position: "Forvet", value: "110 mil. €", goals: 24, assists: 4, matches: 33, image: "https://img.a.transfermarkt.technology/portrait/big/406625-1667856758.jpg" },
+        { rank: 3, name: "Rafael Leão", country: "🇵🇹 Portekiz", age: 25, club: "AC Milan", position: "Forvet", value: "90 mil. €", goals: 10, assists: 8, matches: 30, image: "https://img.a.transfermarkt.technology/portrait/big/357164-1694088932.jpg" },
+        { rank: 4, name: "Khvicha Kvaratskhelia", country: "🇬🇪 Gürcistan", age: 23, club: "Napoli", position: "Orta Saha", value: "80 mil. €", goals: 11, assists: 8, matches: 34, image: "https://img.a.transfermarkt.technology/portrait/big/602814-1664353795.jpg" },
+        { rank: 5, name: "Dusan Vlahovic", country: "🇷🇸 Sırbistan", age: 24, club: "Juventus", position: "Forvet", value: "70 mil. €", goals: 16, assists: 4, matches: 33, image: "https://img.a.transfermarkt.technology/portrait/big/357498-1664353706.jpg" }
+      ],
+      ligue1: [
+        { rank: 1, name: "Kylian Mbappé", country: "🇫🇷 Fransa", age: 25, club: "PSG", position: "Forvet", value: "180 mil. €", goals: 27, assists: 7, matches: 29, image: "https://img.a.transfermarkt.technology/portrait/big/342229-1703771647.jpg" },
+        { rank: 2, name: "Bradley Barcola", country: "🇫🇷 Fransa", age: 21, club: "PSG", position: "Forvet", value: "50 mil. €", goals: 11, assists: 6, matches: 29, image: "https://img.a.transfermarkt.technology/portrait/big/690779-1693469029.jpg" },
+        { rank: 3, name: "Gonçalo Ramos", country: "🇵🇹 Portekiz", age: 23, club: "PSG", position: "Forvet", value: "60 mil. €", goals: 11, assists: 5, matches: 27, image: "https://img.a.transfermarkt.technology/portrait/big/478269-1689165853.jpg" },
+        { rank: 4, name: "Warren Zaïre-Emery", country: "🇫🇷 Fransa", age: 18, club: "PSG", position: "Orta Saha", value: "60 mil. €", goals: 4, assists: 4, matches: 30, image: "https://img.a.transfermarkt.technology/portrait/big/814618-1694609776.jpg" },
+        { rank: 5, name: "Alexandre Lacazette", country: "🇫🇷 Fransa", age: 33, club: "Lyon", position: "Forvet", value: "10 mil. €", goals: 19, assists: 8, matches: 28, image: "https://img.a.transfermarkt.technology/portrait/big/93720-1667830166.jpg" }
+      ]
+    };
+
+    // State
+    let currentData = [];
+    let currentView = 'kompakt';
+    let sortDirection = { age: 'desc', value: 'desc' };
+
+    // Elements
+    const gosterBtn = document.getElementById('gosterBtn');
+    const resultsSection = document.getElementById('resultsSection');
+    const emptyState = document.getElementById('emptyState');
+    const playersList = document.getElementById('playersList');
+    const tableHeader = document.getElementById('tableHeader');
+    const ligSelect = document.getElementById('ligSelect');
+    const sezonSelect = document.getElementById('sezonSelect');
+    const pozisyonSelect = document.getElementById('pozisyonSelect');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const goalsLeaders = document.getElementById('goalsLeaders');
+    const assistsLeaders = document.getElementById('assistsLeaders');
+
+    // Show loading state
+    function showLoading() {
+      playersList.innerHTML = `
+        <div class="py-20 text-center">
+          <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500 mb-4"></div>
+          <p class="text-gray-400">Veriler yükleniyor...</p>
+        </div>
+      `;
+    }
+
+    // Render leaders (goals and assists)
+    function renderLeaders(data) {
+      // Sort by goals
+      const goalsSorted = [...data].sort((a, b) => b.goals - a.goals).slice(0, 5);
+      // Sort by assists
+      const assistsSorted = [...data].sort((a, b) => b.assists - a.assists).slice(0, 5);
+      
+      // Render goals leaders
+      goalsLeaders.innerHTML = goalsSorted.map((player, index) => `
+        <div class="leaderboard-item p-3 flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center font-bold text-sm mr-3">
+              ${index + 1}
+            </div>
+            <div>
+              <div class="font-bold text-white">${player.name}</div>
+              <div class="text-gray-400 text-xs">${player.club} • ${player.position}</div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-bold text-cyan-400">${player.goals}</div>
+            <div class="text-gray-500 text-xs">Gol</div>
+          </div>
+        </div>
+      `).join('');
+      
+      // Render assists leaders
+      assistsLeaders.innerHTML = assistsSorted.map((player, index) => `
+        <div class="leaderboard-item p-3 flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center font-bold text-sm mr-3">
+              ${index + 1}
+            </div>
+            <div>
+              <div class="font-bold text-white">${player.name}</div>
+              <div class="text-gray-400 text-xs">${player.club} • ${player.position}</div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-bold text-purple-400">${player.assists}</div>
+            <div class="text-gray-500 text-xs">Asist</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render players based on current view
+    function renderPlayers(data) {
+      if (data.length === 0) {
+        playersList.innerHTML = `
+          <div class="py-20 text-center">
+            <i class="fas fa-exclamation-circle text-5xl text-yellow-500/50 mb-4"></i>
+            <p class="text-gray-400">Seçilen filtrelere uygun oyuncu bulunamadı</p>
+          </div>
+        `;
+        return;
+      }
+
+      if (currentView === 'kompakt') {
+        tableHeader.style.display = 'grid';
+        renderKompaktView(data);
+      } else if (currentView === 'detayli') {
+        tableHeader.style.display = 'none';
+        renderDetayliView(data);
+      } else if (currentView === 'galeri') {
+        tableHeader.style.display = 'none';
+        renderGaleriView(data);
+      }
+    }
+
+    // Kompakt görünüm (görseldeki gibi)
+    function renderKompaktView(data) {
+      playersList.innerHTML = `<div class="divide-y divide-gray-800/50">` + data.map(player => `
+        <div class="player-row px-4 sm:px-6 py-4 grid grid-cols-12 gap-3 items-center text-sm hover:bg-gray-900/30 transition-colors">
+          <div class="col-span-1 text-center">
+            <div class="w-8 h-8 mx-auto rounded-full bg-gradient-to-r from-cyan-900/30 to-purple-900/30 flex items-center justify-center font-bold text-gray-300">
+              ${player.rank}
+            </div>
+          </div>
+          <div class="col-span-5 sm:col-span-4">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full overflow-hidden mr-3 hidden sm:block">
+                <img src="${player.image}" alt="" class="w-full h-full object-cover" 
+                     onerror="this.src='https://via.placeholder.com/40/0B0E1A/00E5FF?text=${player.name.charAt(0)}'">
+              </div>
+              <div>
+                <div class="font-bold text-white truncate">${player.name}</div>
+                <div class="text-gray-400 text-xs truncate">${player.position}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-3 sm:col-span-2 text-center text-gray-300 hidden md:block text-sm">
+            ${player.country}
+          </div>
+          <div class="col-span-3 sm:col-span-2 text-center">
+            <span class="text-cyan-400 font-semibold text-sm truncate block">${player.club}</span>
+          </div>
+          <div class="col-span-2 sm:col-span-1 text-center text-gray-300 hidden lg:block">${player.age}</div>
+          <div class="col-span-3 sm:col-span-2 text-center">
+            <span class="value-badge text-sm">${player.value}</span>
+          </div>
+        </div>
+      `).join('') + `</div>`;
+    }
+
+    // Detaylı görünüm (görseldeki gibi)
+    function renderDetayliView(data) {
+      playersList.innerHTML = `<div class="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-4">` + data.map(player => `
+        <div class="player-card p-4">
+          <div class="flex items-start">
+            <div class="relative mr-4">
+              <div class="w-20 h-20 rounded-xl overflow-hidden">
+                <img src="${player.image}" alt="" class="w-full h-full object-cover"
+                     onerror="this.src='https://via.placeholder.com/80/0B0E1A/00E5FF?text=${player.name.charAt(0)}'">
+              </div>
+              <div class="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center font-bold text-sm">
+                ${player.rank}
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                <div>
+                  <h3 class="font-bold text-white text-lg truncate">${player.name}</h3>
+                  <div class="text-gray-400 text-sm">${player.country} • ${player.position}</div>
+                </div>
+                <div class="mt-2 sm:mt-0">
+                  <span class="value-badge">${player.value}</span>
+                </div>
+              </div>
+              <div class="text-cyan-400 font-semibold mb-4">${player.club}</div>
+              
+              <div class="grid grid-cols-4 gap-2">
+                <div class="stat-card p-3 text-center">
+                  <div class="text-xl font-bold text-white">${player.age}</div>
+                  <div class="text-gray-500 text-xs">Yaş</div>
+                </div>
+                <div class="stat-card p-3 text-center">
+                  <div class="text-xl font-bold text-cyan-400">${player.goals}</div>
+                  <div class="text-gray-500 text-xs">Gol</div>
+                </div>
+                <div class="stat-card p-3 text-center">
+                  <div class="text-xl font-bold text-purple-400">${player.assists}</div>
+                  <div class="text-gray-500 text-xs">Asist</div>
+                </div>
+                <div class="stat-card p-3 text-center">
+                  <div class="text-xl font-bold text-pink-400">${player.matches}</div>
+                  <div class="text-gray-500 text-xs">Maç</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('') + `</div>`;
+    }
+
+    // Galeri görünüm
+    function renderGaleriView(data) {
+      playersList.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 sm:p-6">
+          ${data.map(player => `
+            <div class="player-card p-4 text-center">
+              <div class="relative mb-4">
+                <div class="w-full h-48 rounded-xl overflow-hidden mb-3">
+                  <img src="${player.image}" alt="" class="w-full h-full object-cover object-top"
+                       onerror="this.src='https://via.placeholder.com/300/0B0E1A/00E5FF?text=Player'">
+                </div>
+                <div class="absolute top-3 left-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-3 py-1 rounded-full font-bold text-sm">
+                  #${player.rank}
+                </div>
+              </div>
+              <h3 class="font-bold text-white text-lg mb-1 truncate">${player.name}</h3>
+              <p class="text-gray-400 text-sm mb-2">${player.country} • ${player.position}</p>
+              <p class="text-cyan-400 font-semibold mb-3 truncate">${player.club}</p>
+              <div class="value-badge inline-block mb-4">${player.value}</div>
+              <div class="grid grid-cols-3 gap-2 pt-4 border-t border-gray-800/50">
+                <div>
+                  <div class="text-lg font-bold text-white">${player.age}</div>
+                  <div class="text-gray-500 text-xs">Yaş</div>
+                </div>
+                <div>
+                  <div class="text-lg font-bold text-cyan-400">${player.goals}</div>
+                  <div class="text-gray-500 text-xs">Gol</div>
+                </div>
+                <div>
+                  <div class="text-lg font-bold text-purple-400">${player.assists}</div>
+                  <div class="text-gray-500 text-xs">Asist</div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // Filter data
+    function filterData() {
+      const lig = ligSelect.value;
+      const pozisyon = pozisyonSelect.value;
+      
+      let data = [...sampleData[lig]];
+      
+      if (pozisyon !== 'all') {
+        data = data.filter(player => player.position === pozisyon);
+      }
+      
+      return data;
+    }
+
+    // Load data
+    function loadData() {
+      showLoading();
+      
+      setTimeout(() => {
+        currentData = filterData();
+        renderPlayers(currentData);
+        renderLeaders(currentData);
+        
+        emptyState.classList.add('hidden');
+        resultsSection.classList.remove('hidden');
+      }, 800);
+    }
+
+    // Sort data
+    function sortData(field) {
+      if (currentData.length === 0) return;
+      
+      const direction = sortDirection[field];
+      
+      currentData.sort((a, b) => {
+        let valA, valB;
+        
+        if (field === 'age') {
+          valA = a.age;
+          valB = b.age;
+        } else if (field === 'value') {
+          valA = parseFloat(a.value.replace(/[^\d.]/g, ''));
+          valB = parseFloat(b.value.replace(/[^\d.]/g, ''));
+        }
+        
+        if (direction === 'asc') {
+          return valA - valB;
+        } else {
+          return valB - valA;
+        }
+      });
+      
+      sortDirection[field] = direction === 'asc' ? 'desc' : 'asc';
+      renderPlayers(currentData);
+    }
+
+    // Event listeners
+    gosterBtn.addEventListener('click', loadData);
+    
+    document.getElementById('sortAge')?.addEventListener('click', () => sortData('age'));
+    document.getElementById('sortValue')?.addEventListener('click', () => sortData('value'));
+
+    // Tab switching
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        currentView = button.getAttribute('data-tab');
+        
+        if (currentData.length > 0) {
+          renderPlayers(currentData);
+        }
+      });
+    });
+
+    // Initialize with some data on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load initial data for Premier League
+      currentData = [...sampleData.premier];
+      renderLeaders(currentData);
+    });
+  </script>
+</body>
+</html>
