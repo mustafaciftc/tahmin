@@ -17,7 +17,7 @@
 
   <!-- Prediction Form -->
   <section class="py-20 px-4 sm:px-6 bg-[#0B0E1A]">
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       <div class="bg-gradient-to-br from-cyan-500/5 via-purple-500/5 to-pink-500/5 border border-cyan-500/20 rounded-3xl p-6 sm:p-10 md:p-12 backdrop-blur-xl shadow-2xl">
         <h2 class="text-3xl sm:text-4xl font-bold text-center mb-3 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
           Tahmin Almak İçin Seçim Yapın
@@ -138,40 +138,60 @@ const PREDICTION_DATA = {
   ]
 };
 
-// Tahmin verileri
+// Geniş tahmin verileri
 const PREDICTION_DETAILS = {
   "Tottenham vs Brentford": {
-    main: { type: "SONUÇ", prediction: "Tottenham", confidence: 78, odds: 1.85 },
+    main: { 
+      type: "MAÇ SONUCU", 
+      prediction: "Tottenham", 
+      confidence: 78, 
+      odds: 1.85,
+      score: "2-1"
+    },
     subPredictions: [
-      { type: "2.5 ÜST/ALT", prediction: "ÜST 2.5", confidence: 72, odds: 1.65 },
-      { type: "KG/VAR/YOK", prediction: "EVET", confidence: 65, odds: 1.90 },
-      { type: "İLK YARI SONUCU", prediction: "Tottenham", confidence: 68, odds: 2.10 },
-      { type: "TOPLAM GOL", prediction: "3-4 GOL", confidence: 71, odds: 2.40 },
+      { type: "2.5 ÜST", prediction: "EVET", confidence: 72, odds: 1.65 },
       { type: "ÇİFT ŞANSLI", prediction: "1X", confidence: 85, odds: 1.25 },
       { type: "HER İKİ TAKIM GOL", prediction: "EVET", confidence: 70, odds: 1.75 },
+      { type: "İLK YARI SONUCU", prediction: "Tottenham", confidence: 68, odds: 2.10 },
+      { type: "KARŞILIKLI GOL", prediction: "EVET", confidence: 65, odds: 1.90 },
+      { type: "TOPLAM GOL", prediction: "3-4 GOL", confidence: 71, odds: 2.40 },
       { type: "İLK GOLÜ ATAN", prediction: "Tottenham", confidence: 62, odds: 2.50 },
       { type: "KÖŞE SAYISI", prediction: "ÜST 9.5", confidence: 67, odds: 1.95 },
       { type: "SARI KART", prediction: "ÜST 4.5", confidence: 73, odds: 1.80 },
       { type: "PENALTI", prediction: "VAR", confidence: 58, odds: 3.00 },
       { type: "SKOR TAHMİNİ", prediction: "2-1", confidence: 45, odds: 8.50 },
-      { type: "İKİNCİ YARI KAZANANI", prediction: "Tottenham", confidence: 69, odds: 1.95 }
+      { type: "İKİNCİ YARI", prediction: "Tottenham", confidence: 69, odds: 1.95 },
+      { type: "1.5 ÜST", prediction: "EVET", confidence: 80, odds: 1.40 },
+      { type: "3.5 ÜST", prediction: "HAYIR", confidence: 65, odds: 1.60 },
+      { type: "ASYA HENDİKAPI", prediction: "Tottenham -0.75", confidence: 66, odds: 1.95 },
+      { type: "TEK SAYI/T. SAYI", prediction: "TEK", confidence: 55, odds: 1.90 }
     ]
   },
   "Arsenal vs Chelsea": {
-    main: { type: "SONUÇ", prediction: "Arsenal", confidence: 82, odds: 1.75 },
+    main: { 
+      type: "MAÇ SONUCU", 
+      prediction: "Arsenal", 
+      confidence: 82, 
+      odds: 1.75,
+      score: "2-0"
+    },
     subPredictions: [
-      { type: "2.5 ÜST/ALT", prediction: "ALT 2.5", confidence: 68, odds: 1.85 },
-      { type: "KG/VAR/YOK", prediction: "EVET", confidence: 60, odds: 2.05 },
+      { type: "2.5 ALT", prediction: "EVET", confidence: 68, odds: 1.85 },
+      { type: "ÇİFT ŞANSLI", prediction: "1X", confidence: 90, odds: 1.15 },
+      { type: "HER İKİ TAKIM GOL", prediction: "HAYIR", confidence: 60, odds: 2.05 },
       { type: "İLK YARI SONUCU", prediction: "Beraberlik", confidence: 55, odds: 2.30 },
+      { type: "KARŞILIKLI GOL", prediction: "HAYIR", confidence: 60, odds: 2.05 },
       { type: "TOPLAM GOL", prediction: "2-3 GOL", confidence: 75, odds: 2.10 },
-      { type: "ÇİFT ŞANSLI", prediction: "1X", confidence: 90, odds: 1.15 }
-    ]
-  },
-  "Manchester United vs Liverpool": {
-    main: { type: "SONUÇ", prediction: "Liverpool", confidence: 70, odds: 2.10 },
-    subPredictions: [
-      { type: "2.5 ÜST/ALT", prediction: "ÜST 2.5", confidence: 80, odds: 1.55 },
-      { type: "KG/VAR/YOK", prediction: "EVET", confidence: 85, odds: 1.45 }
+      { type: "İLK GOLÜ ATAN", prediction: "Arsenal", confidence: 64, odds: 2.20 },
+      { type: "KÖŞE SAYISI", prediction: "ÜST 8.5", confidence: 70, odds: 1.80 },
+      { type: "SARI KART", prediction: "ALT 4.5", confidence: 62, odds: 1.75 },
+      { type: "PENALTI", prediction: "YOK", confidence: 70, odds: 1.50 },
+      { type: "SKOR TAHMİNİ", prediction: "2-0", confidence: 38, odds: 9.00 },
+      { type: "İKİNCİ YARI", prediction: "Arsenal", confidence: 74, odds: 1.85 },
+      { type: "1.5 ÜST", prediction: "EVET", confidence: 85, odds: 1.30 },
+      { type: "3.5 ÜST", prediction: "HAYIR", confidence: 72, odds: 1.45 },
+      { type: "ASYA HENDİKAPI", prediction: "Arsenal -1", confidence: 58, odds: 2.10 },
+      { type: "TEK SAYI/T. SAYI", prediction: "ÇİFT", confidence: 52, odds: 1.85 }
     ]
   }
   // Diğer maçlar için benzer şekilde eklenebilir
@@ -314,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* -------------------------------------------------
-     TAHMİN BUTONU - GÜNCELLENMİŞ
+     TAHMİN BUTONU - SADECE DETAYLI TAHMİN KARTLARI DEĞİŞTİ
   ------------------------------------------------- */
   showPredictionBtn.onclick = () => {
     const match = matchHidden.value;
@@ -331,135 +351,177 @@ document.addEventListener("DOMContentLoaded", () => {
       const predictionDetails = PREDICTION_DETAILS[match] || getDefaultPrediction(match, team1, team2);
       
       predictionResult.innerHTML = `
-        <div class="rounded-3xl border border-cyan-500/30 overflow-hidden">
-          <!-- Ana Tahmin Banner -->
-          <div class="bg-gradient-to-r from-cyan-900/30 via-purple-900/30 to-pink-900/30 p-6 border-b border-cyan-500/20">
-            <div class="flex items-center justify-between mb-4">
+        <div class="rounded-3xl border border-cyan-500/30 overflow-hidden bg-gray-900/50">
+          <!-- ÜST BÖLÜM: Maç Bilgileri ve Ana Tahmin -->
+          <div class="bg-gradient-to-r from-cyan-900/20 via-purple-900/20 to-pink-900/20 p-6 border-b border-cyan-500/20">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
               <div class="flex items-center gap-3">
-                ${renderLogo(window.LEAGUE_LOGOS?.[league], "w-8 h-8")}
-                <h3 class="text-xl font-bold text-white">${league}</h3>
+                ${renderLogo(window.LEAGUE_LOGOS?.[league], "w-10 h-10")}
+                <div>
+                  <h3 class="text-xl font-bold text-white">${league}</h3>
+                  <p class="text-sm text-gray-400">${new Date().toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                </div>
               </div>
-              <div class="text-sm text-gray-400">
-                <span class="text-cyan-400">AI Tahmin</span> • %${predictionDetails.main.confidence} Güven
-              </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row justify-between items-center my-6 gap-6">
-              <div class="text-center flex-1">
-                ${renderLogo(window.TEAM_LOGOS?.[team1], "w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3")}
-                <p class="text-lg font-semibold text-white">${team1}</p>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="text-3xl font-bold text-purple-400 px-4 mb-2">VS</div>
-                <div class="text-xs text-gray-400">${new Date().toLocaleDateString('tr-TR')}</div>
-              </div>
-              <div class="text-center flex-1">
-                ${renderLogo(window.TEAM_LOGOS?.[team2], "w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3")}
-                <p class="text-lg font-semibold text-white">${team2}</p>
+              <div class="flex items-center gap-3">
+                <div class="text-right">
+                  <div class="text-sm font-bold text-cyan-400">AI TAHMİN SİSTEMİ</div>
+                  <div class="text-xs text-gray-400">%${predictionDetails.main.confidence} Güven Oranı</div>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                  <span class="text-sm font-bold">AI</span>
+                </div>
               </div>
             </div>
 
-            <!-- Ana Tahmin Kartı -->
-            <div class="mt-6 p-5 rounded-xl bg-gradient-to-r from-green-900/30 to-emerald-900/30 border border-green-500/30">
-              <div class="flex justify-between items-center mb-3">
-                <span class="text-sm font-bold text-green-400 uppercase tracking-wider">
-                  ${predictionDetails.main.type} TAHMİNİ
-                </span>
-                <span class="text-sm font-bold text-white bg-green-600/30 px-3 py-1 rounded-full">
-                  Oran: ${predictionDetails.main.odds}
-                </span>
+            <!-- Takımlar ve Ana Tahmin -->
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div class="text-center flex-1">
+                ${renderLogo(window.TEAM_LOGOS?.[team1], "w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3")}
+                <p class="text-xl font-bold text-white">${team1}</p>
+                <p class="text-sm text-gray-400">Ev Sahibi</p>
               </div>
-              <div class="text-center">
-                <p class="text-2xl font-bold text-white mb-2">
-                  ${predictionDetails.main.prediction}
-                </p>
-                <div class="flex items-center justify-center gap-4">
-                  <div class="text-sm text-gray-300">
-                    Güven: <span class="font-bold text-green-400">%${predictionDetails.main.confidence}</span>
-                  </div>
-                  <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
-                    <div class="h-full bg-gradient-to-r from-green-500 to-emerald-500" 
-                         style="width: ${predictionDetails.main.confidence}%"></div>
+              
+              <div class="flex flex-col items-center flex-1">
+                <div class="text-center mb-6">
+                  <div class="text-3xl font-bold text-purple-400 mb-2">VS</div>
+                  <div class="inline-block">
+                    <div class="text-2xl font-bold text-white bg-gradient-to-r from-cyan-600 to-purple-600 px-4 py-2 rounded-lg">
+                      ${predictionDetails.main.score}
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1">Skor Tahmini</div>
                   </div>
                 </div>
+                
+                <!-- ANA TAHMİN KARTI -->
+                <div class="w-full max-w-md p-5 rounded-xl bg-gradient-to-r from-cyan-900/30 to-emerald-900/30 border border-cyan-500/30">
+                  <div class="text-center mb-4">
+                    <span class="text-sm font-bold text-cyan-400">ANA TAHMİN</span>
+                    <p class="text-2xl font-bold text-white mt-2">${predictionDetails.main.prediction}</p>
+                    <div class="text-sm text-gray-400">${predictionDetails.main.type}</div>
+                  </div>
+                  
+                  <div class="flex justify-around items-center">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-green-400">${predictionDetails.main.odds}</div>
+                      <div class="text-xs text-gray-400">Oran</div>
+                    </div>
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-cyan-400">%${predictionDetails.main.confidence}</div>
+                      <div class="text-xs text-gray-400">Güven</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="text-center flex-1">
+                ${renderLogo(window.TEAM_LOGOS?.[team2], "w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3")}
+                <p class="text-xl font-bold text-white">${team2}</p>
+                <p class="text-sm text-gray-400">Deplasman</p>
               </div>
             </div>
           </div>
 
-          <!-- Alt Tahminler Grid -->
-          <div class="p-6 bg-gray-900/50">
+          <!-- DETAYLI TAHMİN ANALİZİ - TEK TEK AYRI KARTLAR -->
+          <div class="p-6">
             <div class="flex items-center justify-between mb-6">
-              <h4 class="text-lg font-bold text-white">Detaylı Tahminler</h4>
-              <span class="text-sm text-gray-400">${predictionDetails.subPredictions.length} alt tahmin</span>
+              <div>
+                <h4 class="text-lg font-bold text-white">DETAYLI TAHMİN ANALİZİ</h4>
+                <p class="text-sm text-gray-400">${predictionDetails.subPredictions.length} farklı bahis türü</p>
+              </div>
+              <div class="flex items-center gap-2 text-sm">
+                <span class="text-gray-400">Ortalama Güven:</span>
+                <span class="font-bold text-cyan-400">%${calculateAverageConfidence(predictionDetails.subPredictions)}</span>
+              </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- TEK TEK AYRI TAHMİN KARTLARI -->
+            <div class="space-y-4">
               ${predictionDetails.subPredictions.map((pred, index) => `
-                <div class="prediction-card bg-gray-800/30 border border-gray-700/50 rounded-xl p-4 hover:border-cyan-500/50 transition-all duration-300">
-                  <div class="flex justify-between items-start mb-3">
-                    <span class="text-xs font-bold text-cyan-400 px-2 py-1 bg-cyan-500/10 rounded">
-                      ${pred.type}
-                    </span>
-                    <span class="text-sm font-bold text-white bg-purple-600/30 px-2 py-1 rounded">
-                      ${pred.odds}
-                    </span>
+                <div class="prediction-card bg-gray-800/50 border border-gray-700/50 rounded-xl p-5 hover:border-cyan-500/50 transition-all duration-300">
+                  <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-600 to-purple-600 flex items-center justify-center">
+                        <span class="text-sm font-bold text-white">${index + 1}</span>
+                      </div>
+                      <div>
+                        <div class="text-lg font-bold text-cyan-400">${pred.type}</div>
+                        <div class="text-sm text-gray-400">Bahis Tipi</div>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-xl font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 px-3 py-1 rounded-lg">${pred.odds}</div>
+                      <div class="text-xs text-gray-400 mt-1">Oran</div>
+                    </div>
                   </div>
                   
-                  <div class="text-center mb-4">
-                    <p class="text-lg font-bold text-white mb-2">${pred.prediction}</p>
-                    <div class="flex items-center justify-center gap-2">
-                      <div class="text-xs text-gray-400">Güven:</div>
-                      <div class="flex items-center gap-1">
-                        <div class="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-                          <div class="h-full bg-gradient-to-r from-cyan-500 to-purple-500" 
-                               style="width: ${pred.confidence}%"></div>
-                        </div>
-                        <span class="text-xs font-bold text-cyan-400">%${pred.confidence}</span>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-white mb-2">${pred.prediction}</div>
+                      <div class="text-sm text-gray-400">Tahmin</div>
+                    </div>
+                    
+                    <div class="text-center">
+                      <div class="text-2xl font-bold ${getConfidenceColor(pred.confidence)} mb-2">%${pred.confidence}</div>
+                      <div class="text-sm text-gray-400">Güven Oranı</div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                      <div class="w-full h-3 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="h-full ${getConfidenceGradient(pred.confidence)}" style="width: ${pred.confidence}%"></div>
+                      </div>
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>0%</span>
+                        <span class="${getConfidenceColor(pred.confidence)} font-bold">${getConfidenceText(pred.confidence)}</span>
+                        <span>100%</span>
                       </div>
                     </div>
                   </div>
 
-                  <div class="flex justify-between items-center text-xs">
-                    <span class="text-gray-500">#${index + 1}</span>
-                    <div class="flex gap-1">
+                  <div class="flex justify-between items-center pt-4 border-t border-gray-700/50">
+                    <div class="flex items-center gap-2">
                       ${getConfidenceStars(pred.confidence)}
+                      <span class="text-sm text-gray-400">Değerlendirme</span>
+                    </div>
+                    <div class="text-sm ${getConfidenceColor(pred.confidence)} font-bold">
+                      ${getSuccessProbability(pred.confidence)} Başarı İhtimali
                     </div>
                   </div>
                 </div>
               `).join('')}
             </div>
 
-            <!-- Güven Aralığı ve İstatistikler -->
+            <!-- İSTATİSTİK PANELİ -->
             <div class="mt-8 p-5 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/50">
-              <h5 class="text-md font-bold text-white mb-4">Tahmin Analizi</h5>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="stat-box text-center p-3">
-                  <div class="text-2xl font-bold text-cyan-400">%${calculateAverageConfidence(predictionDetails.subPredictions)}</div>
-                  <div class="text-xs text-gray-400">Ortalama Güven</div>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stat-box p-4 text-center">
+                  <div class="text-3xl font-bold text-cyan-400">%${calculateAverageConfidence(predictionDetails.subPredictions)}</div>
+                  <div class="text-sm text-gray-400 mt-1">Ortalama Güven</div>
                 </div>
-                <div class="stat-box text-center p-3">
-                  <div class="text-2xl font-bold text-green-400">${getSuccessRate(predictionDetails.subPredictions)}</div>
-                  <div class="text-xs text-gray-400">Başarı Oranı</div>
+                <div class="stat-box p-4 text-center">
+                  <div class="text-3xl font-bold text-green-400">${getHighConfidenceCount(predictionDetails.subPredictions)}/${predictionDetails.subPredictions.length}</div>
+                  <div class="text-sm text-gray-400 mt-1">Yüksek Güvenli</div>
                 </div>
-                <div class="stat-box text-center p-3">
-                  <div class="text-2xl font-bold text-purple-400">${predictionDetails.subPredictions.length}</div>
-                  <div class="text-xs text-gray-400">Toplam Tahmin</div>
+                <div class="stat-box p-4 text-center">
+                  <div class="text-3xl font-bold text-purple-400">${getAverageOdds(predictionDetails.subPredictions)}</div>
+                  <div class="text-sm text-gray-400 mt-1">Ortalama Oran</div>
+                </div>
+                <div class="stat-box p-4 text-center">
+                  <div class="text-3xl font-bold text-pink-400">${predictionDetails.subPredictions.length}</div>
+                  <div class="text-sm text-gray-400 mt-1">Toplam Tahmin</div>
                 </div>
               </div>
-              <div class="mt-4 text-center">
-                <span class="text-xs text-gray-400">AI modeli ${predictionDetails.subPredictions.length * 7} veri noktası analiz etti</span>
+              <div class="mt-6 pt-4 border-t border-gray-700/50">
+                <div class="text-center">
+                  <span class="text-xs text-gray-400">
+                    <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    AI modeli ${predictionDetails.subPredictions.length * 12} veri noktası analiz etti • Son güncelleme: ${new Date().toLocaleTimeString('tr-TR')}
+                  </span>
+                </div>
               </div>
             </div>
 
-            <!-- Son Güncelleme -->
-            <div class="mt-6 text-center">
-              <div class="inline-flex items-center gap-2 text-xs text-gray-500">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                Son güncelleme: ${new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
-              </div>
-            </div>
           </div>
         </div>
       `;
@@ -476,39 +538,51 @@ document.addEventListener("DOMContentLoaded", () => {
   function getDefaultPrediction(match, team1, team2) {
     const randomMain = Math.random() > 0.5 ? team1 : team2;
     const confidence = Math.floor(Math.random() * 30) + 60;
+    const score = Math.random() > 0.5 ? "2-1" : "1-0";
     
     const subTypes = [
-      "2.5 ÜST/ALT", "KG/VAR/YOK", "İLK YARI SONUCU", "TOPLAM GOL",
-      "ÇİFT ŞANSLI", "HER İKİ TAKIM GOL", "İLK GOLÜ ATAN", "KÖŞE SAYISI",
-      "SARI KART", "PENALTI", "SKOR TAHMİNİ", "İKİNCİ YARI KAZANANI"
+      "2.5 ÜST", "ÇİFT ŞANSLI", "HER İKİ TAKIM GOL", "İLK YARI SONUCU",
+      "KARŞILIKLI GOL", "TOPLAM GOL", "İLK GOLÜ ATAN", "KÖŞE SAYISI",
+      "SARI KART", "PENALTI", "SKOR TAHMİNİ", "İKİNCİ YARI",
+      "1.5 ÜST", "3.5 ÜST", "ASYA HENDİKAPI", "TEK SAYI/T. SAYI"
     ];
     
     const subPredictions = subTypes.map((type, index) => {
       const predictions = {
-        "2.5 ÜST/ALT": ["ÜST 2.5", "ALT 2.5"],
-        "KG/VAR/YOK": ["EVET", "HAYIR"],
-        "İLK YARI SONUCU": [team1, "Beraberlik", team2],
-        "TOPLAM GOL": ["0-1 GOL", "2-3 GOL", "3-4 GOL", "4+ GOL"],
+        "2.5 ÜST": ["EVET", "HAYIR"],
         "ÇİFT ŞANSLI": ["1X", "12", "X2"],
         "HER İKİ TAKIM GOL": ["EVET", "HAYIR"],
+        "İLK YARI SONUCU": [team1, "Beraberlik", team2],
+        "KARŞILIKLI GOL": ["EVET", "HAYIR"],
+        "TOPLAM GOL": ["0-1 GOL", "2-3 GOL", "3-4 GOL", "4+ GOL"],
         "İLK GOLÜ ATAN": [team1, team2],
         "KÖŞE SAYISI": ["ÜST 9.5", "ALT 9.5"],
         "SARI KART": ["ÜST 4.5", "ALT 4.5"],
         "PENALTI": ["VAR", "YOK"],
         "SKOR TAHMİNİ": ["1-0", "2-0", "2-1", "1-1", "0-0", "3-1"],
-        "İKİNCİ YARI KAZANANI": [team1, "Beraberlik", team2]
+        "İKİNCİ YARI": [team1, "Beraberlik", team2],
+        "1.5 ÜST": ["EVET", "HAYIR"],
+        "3.5 ÜST": ["EVET", "HAYIR"],
+        "ASYA HENDİKAPI": [`${team1} -0.75`, `${team2} +0.75`, "Beraberlik"],
+        "TEK SAYI/T. SAYI": ["TEK", "ÇİFT"]
       };
       
       const predList = predictions[type] || ["EVET"];
       const prediction = predList[Math.floor(Math.random() * predList.length)];
-      const conf = Math.floor(Math.random() * 25) + 55;
-      const odds = (1.5 + Math.random() * 2).toFixed(2);
+      const conf = Math.floor(Math.random() * 35) + 50;
+      const odds = (1.4 + Math.random() * 2.5).toFixed(2);
       
       return { type, prediction, confidence: conf, odds };
     });
     
     return {
-      main: { type: "SONUÇ", prediction: randomMain, confidence, odds: (1.7 + Math.random() * 1.3).toFixed(2) },
+      main: { 
+        type: "MAÇ SONUCU", 
+        prediction: randomMain, 
+        confidence, 
+        odds: (1.7 + Math.random() * 1.5).toFixed(2),
+        score
+      },
       subPredictions
     };
   }
@@ -518,12 +592,40 @@ document.addEventListener("DOMContentLoaded", () => {
     let starsHTML = '';
     for (let i = 0; i < 5; i++) {
       if (i < stars) {
-        starsHTML += `<svg class="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
+        starsHTML += `<svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
       } else {
-        starsHTML += `<svg class="w-3 h-3 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
+        starsHTML += `<svg class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
       }
     }
     return starsHTML;
+  }
+  
+  function getConfidenceColor(confidence) {
+    if (confidence >= 80) return "text-green-400";
+    if (confidence >= 70) return "text-cyan-400";
+    if (confidence >= 60) return "text-yellow-400";
+    return "text-orange-400";
+  }
+  
+  function getConfidenceGradient(confidence) {
+    if (confidence >= 80) return "bg-gradient-to-r from-green-500 to-emerald-500";
+    if (confidence >= 70) return "bg-gradient-to-r from-cyan-500 to-blue-500";
+    if (confidence >= 60) return "bg-gradient-to-r from-yellow-500 to-amber-500";
+    return "bg-gradient-to-r from-orange-500 to-red-500";
+  }
+  
+  function getConfidenceText(confidence) {
+    if (confidence >= 80) return "ÇOK YÜKSEK";
+    if (confidence >= 70) return "YÜKSEK";
+    if (confidence >= 60) return "ORTA";
+    return "DÜŞÜK";
+  }
+  
+  function getSuccessProbability(confidence) {
+    if (confidence >= 80) return "Yüksek";
+    if (confidence >= 70) return "İyi";
+    if (confidence >= 60) return "Orta";
+    return "Düşük";
   }
   
   function calculateAverageConfidence(predictions) {
@@ -531,60 +633,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return Math.round(total / predictions.length);
   }
   
-  function getSuccessRate(predictions) {
-    const highConfidence = predictions.filter(p => p.confidence >= 70).length;
-    return `${Math.round((highConfidence / predictions.length) * 100)}%`;
+  function getHighConfidenceCount(predictions) {
+    return predictions.filter(p => p.confidence >= 70).length;
+  }
+  
+  function getAverageOdds(predictions) {
+    const total = predictions.reduce((sum, pred) => sum + parseFloat(pred.odds), 0);
+    return (total / predictions.length).toFixed(2);
   }
 });
 </script>
-
-<style>
-.animated-gradient {
-  background-size: 200% 200%;
-  animation: gradient 3s ease infinite;
-}
-
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.prediction-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.1);
-}
-
-.stat-box {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
-  transition: all 0.3s ease;
-}
-
-.stat-box:hover {
-  border-color: rgba(6, 182, 212, 0.3);
-  background: rgba(6, 182, 212, 0.05);
-}
-
-/* Custom scrollbar for prediction cards */
-#predictionResult::-webkit-scrollbar {
-  width: 8px;
-}
-
-#predictionResult::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-#predictionResult::-webkit-scrollbar-thumb {
-  background: rgba(6, 182, 212, 0.5);
-  border-radius: 4px;
-}
-
-#predictionResult::-webkit-scrollbar-thumb:hover {
-  background: rgba(6, 182, 212, 0.7);
-}
-</style>
 
 </body>
 </html>
